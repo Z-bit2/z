@@ -1,0 +1,582 @@
+#mangowallet_nav {
+    text-shadow: var(--neon)
+}
+
+.toolbar_btn {
+    /*width: 470px;*/
+    width: 400px;
+    font-size: 1.75em;
+    margin: auto;
+    height: 2em;
+    background: #4573c4;
+}
+
+#wallet_view {
+    width: 50%;
+    margin: auto;
+    border: 1px solid var(--text-color);
+    position: relative;
+    display: none
+}
+
+.list_selector {
+    position: absolute;
+    left: 5000%;
+    visibility: hidden
+}
+
+.list_selector+label {
+    opacity: .8;
+    width: 32%;
+    display: inline-block;
+    text-align: center;
+    border: 1px solid var(--text-color);
+    border-radius: 5px 5px 0 0;
+    font-size: 1.5em;
+    -webkit-filter: grayscale(80%);
+    filter: grayscale(80%)
+}
+
+#asset_list_selector+label {
+    background-image: var(--main-background)
+}
+
+#admin_list_selector+label {
+    background-image: linear-gradient(180deg,var(--red-dark),var(--red-light))
+}
+
+#rvn_list_selector+label {
+    background-image: linear-gradient(180deg,var(--purple-dark),var(--purple-light))
+}
+
+.list_selector:checked+label {
+    opacity: 1;
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0)
+}
+
+.asset_disp {
+    width: 90%;
+    height: 75px;
+    margin: auto;
+    border: 1px solid var(--border-light);
+    font-size: 2em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    cursor: pointer;
+    background-color: var(--asset-tab-background);
+    color: var(--text-dark);
+    position: relative;
+    border-radius: 2px
+}
+
+#toolbar {
+    /*display: none*/
+}
+
+#admin_list {
+    display: none;
+    position: relative;
+    padding-top: 5px;
+}
+
+#asset_list {
+    display: none;
+    position: relative;
+    padding-top: 5px;
+    width: 100%
+}
+
+#rvn_list {
+    display: none;
+    position: relative
+}
+
+#admin_list_selector:checked~#admin_list {
+    display: block
+}
+
+#asset_list_selector:checked~#asset_list {
+    display: block
+}
+
+#rvn_list_selector:checked~#rvn_list {
+    display: block
+}
+
+.wallet_btn {
+    cursor: pointer
+}
+
+.wallet_btn:hover {
+    opacity: .8
+}
+
+#alpha_btn2 {
+    display: none
+}
+
+#wallet_alpha {
+    position: absolute;
+    visibility: hidden;
+    left: 5000%
+}
+
+#alpha_btn {
+    background-image: url(/images/alpha_az.png);
+    height: 32px;
+    width: 32px;
+    display: inline-block;
+    background-repeat: no-repeat
+}
+
+.header_btn {
+    margin-left: 25px
+}
+
+#wallet_alpha:checked~#alpha_btn {
+    background-image: url(/images/alpha_za.png)
+}
+
+#menu_btn {
+    background-image: url(/images/main_menu.png);
+    height: 32px;
+    width: 42px;
+    display: inline-block;
+    background-repeat: no-repeat
+}
+
+#reload_btn {
+    background-image: url(/images/reload.png);
+    height: 32px;
+    width: 35px;
+    display: inline-block;
+    background-repeat: no-repeat
+}
+
+#search_btn {
+    background-image: url(/images/search.png);
+    height: 32px;
+    width: 35px;
+    display: inline-block;
+    background-repeat: no-repeat
+}
+
+.admin_opts,.asset_qty {
+    float: right;
+    margin-top: 15px;
+    margin-right: 5px
+}
+
+.asset_name {
+    font-weight: 300;
+    display: inline-block;
+    margin-left: 50px;
+    margin-top: 15px
+}
+
+.asset_icon {
+    font-family: var(--asset-letter-font);
+    font-size: 2em;
+    float: left;
+    margin-top: 15px;
+    margin-left: 5px;
+    width: 50px
+}
+
+#user_menu {
+    position: absolute;
+    z-index: 20;
+    background-color: var(--menu-background-color);
+    padding: 15px 35px 20px 25px;
+    border-radius: 5px;
+    border: 1px solid var(--background-light);
+    display: none;
+}
+
+#user_menu a {
+    display: block;
+    font-weight: 300;
+    color: var(--text-dark);
+    cursor: pointer
+}
+
+#user_menu a:hover {
+    opacity: 0.7
+}
+
+#menu_disp {
+    position: absolute;
+    visibility: hidden;
+    left: 5000%
+}
+
+#menu_disp:checked~#user_menu {
+    display: block;
+}
+
+.asset_click {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: .4;
+    top: 0;
+    left: 0
+}
+
+.admin_options {
+    display: none;
+    background-color: var(--menu-background-color);
+    border: 1px solid #000;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    right: 50px;
+    color: var(--text-dark);
+    font-size: .75em;
+    font-weight: 300;
+    padding: 2px 10px;
+    z-index: 50;
+    transform: translateY(-50%)
+}
+
+.admin_options_checkbox {
+    position: absolute;
+    visibility: hidden;
+    left: 5000%
+}
+
+.admin_options_checkbox:checked~.admin_options {
+    display: block
+}
+
+a.admin_opt {
+    display: block
+}
+
+a.admin_opt:hover {
+    opacity: .5;
+    cursor: pointer
+}
+
+#show_admin_container {
+    text-align: right;
+    margin-top: -20px;
+    margin-bottom: 25px
+}
+
+.admin-token {
+    color: red
+}
+
+#asset_search {
+    width: 84%;
+    position: relative;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    padding: 3px 35px;
+    background-color: #333;
+    color: #ccc;
+    font-weight: 300;
+    background-image: url(/imagessearch_w.png);
+    background-repeat: no-repeat;
+    font-size: 1em;
+    font-family: inherit
+}
+
+#show_search {
+    position: absolute;
+    left: 5000%;
+    visibility: hidden
+}
+
+#asset_search_container {
+    width: 100%;
+    position: relative;
+    text-align: center;
+    display: none
+}
+
+#show_search:checked~#asset_search_container {
+    display: block;
+    margin: auto
+}
+
+#wallet_login {
+    font-family: inherit
+}
+
+#wallet_login:hover {
+    color: #eee
+}
+
+input.user_info {
+    font-size: 1.5em;
+    width: 400px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin: auto;
+    display: block;
+    padding: 3px;
+    margin-bottom: 10px
+}
+
+#testnet_indicator {
+    position: absolute;
+    top: 0;
+    left: -50px;
+    font-size: 1.5em;
+    color: var(--mango-blue);
+    letter-spacing: 2px;
+    width: 500%;
+    overflow: hidden;
+    word-break: keep-all;
+    z-index: 30;
+    opacity: .5;
+    display: none
+}
+
+#trez_login {
+    display: none;
+    text-align: center;
+    -webkit-animation: pulse 3s infinite ease-in-out;
+    -o-animation: pulse 3s infinite ease-in-out;
+    -ms-animation: pulse 3s infinite ease-in-out;
+    -moz-animation: pulse 3s infinite ease-in-out;
+    animation: pulse 3s infinite ease-in-out
+}
+
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-transform: scale(.9);
+        opacity: .7
+    }
+
+    50% {
+        -webkit-transform: scale(1);
+        opacity: 1
+    }
+
+    100% {
+        -webkit-transform: scale(.9);
+        opacity: .7
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(.9);
+        opacity: .7
+    }
+
+    50% {
+        transform: scale(1);
+        opacity: 1
+    }
+
+    100% {
+        transform: scale(.9);
+        opacity: .7
+    }
+}
+
+#trezor_indicator {
+    position: absolute;
+    left: 48%;
+    top: 60%;
+    background-image: url(/images/trezor-logo.png);
+    background-repeat: no-repeat;
+    width: 125px;
+    height: 40px;
+    transform: translate(-50%,-50%);
+    opacity: .9;
+    display: none
+}
+
+@media(max-width: 1500px) {
+    #wallet_view {
+        width:60%
+    }
+}
+
+@media (max-width: 1225px) {
+    #wallet_view {
+        width:75%
+    }
+}
+
+@media (max-width: 1000px) {
+    #wallet_view {
+        width:90%
+    }
+
+    #asset_search {
+        width: 83%
+    }
+
+    .asset_name {
+        margin-left: 25px
+    }
+
+    .asset_disp {
+        font-size: 1.75em
+    }
+}
+
+@media(max-width: 768px) {
+    #wallet_view {
+        width:98%
+    }
+
+    .asset_disp {
+        font-size: 1.5em
+    }
+
+    .asset_name {
+        margin-left: 15px
+    }
+
+    #asset_search {
+        width: 82%
+    }
+}
+
+@media(max-width: 600px) {
+    #header_rvn_bal {
+        font-size:.8em;
+        margin-top: 7px
+    }
+
+    #alpha_btn {
+        background-image: url(/images/alpha_az.png);
+        height: 24px;
+        width: 24px;
+        display: inline-block;
+        background-repeat: no-repeat
+    }
+
+    #wallet_alpha:checked~#alpha_btn {
+        background-image: url(/images/alpha_za.png)
+    }
+
+    #menu_btn {
+        background-image: url(/images/main_menu.png);
+        height: 24px;
+        width: 33px;
+        display: inline-block;
+        background-repeat: no-repeat
+    }
+
+    #reload_btn {
+        background-image: url(/images/reload.png);
+        height: 24px;
+        width: 26px;
+        display: inline-block;
+        background-repeat: no-repeat
+    }
+
+    #search_btn {
+        background-image: url(/images/search.png);
+        height: 24px;
+        width: 24px;
+        display: inline-block;
+        background-repeat: no-repeat
+    }
+
+    .mobile_hide {
+        display: none
+    }
+
+    .asset_disp {
+        font-size: 1.25em
+    }
+
+    .asset_qty {
+        float: none;
+        margin: 0;
+        width: 50%;
+        display: block;
+        margin-left: 70px
+    }
+
+    .asset_name {
+        margin-top: 5px
+    }
+
+    .admin_name {
+        margin-top: 15px
+    }
+
+    .long_name {
+        font-size: .9em
+    }
+
+    .admin_icon {
+        width: 35px
+    }
+
+    .list_selector+label {
+        font-size: 1.25em
+    }
+
+    .header_btn {
+        margin-left: 15px
+    }
+
+    #asset_search {
+        width: 80%
+    }
+
+    .new_addr {
+        font-size: 1.05em
+    }
+}
+
+@media (max-width: 500px) {
+    .header_btn {
+        margin-left:10px
+    }
+
+    #asset_search {
+        width: 75%
+    }
+}
+
+@media(max-width: 400px) {
+    .asset_disp {
+        font-size:1.15em
+    }
+}
+
+@supports (-webkit-overflow-scrolling:touch) {
+    #toolbar input[type=button] {
+        font-size: 1.75em
+    }
+}
+
+::-webkit-input-placeholder {
+    font-family: 'Open Sans'
+}
+
+::-moz-placeholder {
+    font-family: 'Open Sans'
+}
+
+:-ms-input-placeholder {
+    font-family: 'Open Sans'
+}
+
+::placeholder {
+    font-family: 'Open Sans'
+}
+
+.title_treit{
+    font-size: 3em;
+    text-align: center;
+}
+
+.title_tech{
+    font-size: 2.5em;
+    text-align: center;
+}

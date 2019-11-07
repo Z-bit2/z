@@ -1,0 +1,690 @@
+#assetbuilder_nav {
+    text-shadow: var(--neon)
+}
+
+div#input_qty {
+    margin-left: 10%;
+    width: 10%;
+    display: inline-block;
+    font-size: .8em
+}
+
+div#input_subunits {
+    width: 10%;
+    margin-left: 5%;
+    display: inline-block;
+    font-size: .8em
+}
+
+div#input_reissuable {
+    padding-top: 15px;
+    float: right;
+    margin-right: 11.5%
+}
+
+div#input_icon {
+    vertical-align: top;
+    display: inline-block;
+    margin-left: 10%;
+    width: 10%
+}
+
+div#input_namedesc {
+    display: inline-block;
+    width: 70%;
+    vertical-align: top;
+    margin-top: -20px
+}
+
+section#metadata_2 {
+    font-size: 1.35em;
+    padding-top: 10px
+}
+
+div.left_field {
+    margin-left: 10%;
+    width: 35%;
+    display: inline-block
+}
+
+div.right_field {
+    margin-left: 6%;
+    width: 37.5%;
+    display: inline-block
+}
+
+div#name_indicator {
+    color: var(--error-color);
+    position: absolute;
+    right: 11.5%;
+    top: .4em;
+    font-size: .8em;
+    font-style: italic;
+    font-weight: 300;
+    display: none
+}
+
+div#available_indicator {
+    color: #0df35e;
+    position: absolute;
+    right: 11.5%;
+    top: .4em;
+    font-size: .8em;
+    font-style: italic;
+    font-weight: 300;
+    display: none
+}
+
+div#sale_disp {
+    display: inline-block;
+    opacity: .5;
+    top: -20px;
+    width: 150px;
+    font-size: 1.35em;
+    margin-left: 5px
+}
+
+div#drop-area {
+    width: 100%;
+    height: 100px;
+    padding: 3px;
+    border: 1px solid var(--text-color);
+    border-radius: 5px
+}
+
+div#drop-area:hover {
+    border-color: #000;
+    background-image: linear-gradient(180deg,var(--home-dark),var(--home-light))
+}
+
+br.horiz-gutter {
+    font-size: 1.65em
+}
+
+.contract_type_container {
+    color: var(--text-color);
+    margin-top: 25px
+}
+
+input.contract_type {
+    visibility: hidden;
+    position: absolute
+}
+
+.contract_type_lbl {
+    padding: 5px 0 5px 0
+}
+
+.btn_container {
+    display: inline-block;
+    margin-left: 5px;
+    width: 60%
+}
+
+.radio_option {
+    display: inline-block;
+    width: 200px;
+    color: var(--text-color);
+    vertical-align: middle
+}
+
+.radio_option:not(:last-child) {
+    margin-right: 2%
+}
+
+div#contract_url_container {
+    width: 88.75%;
+    font-size: 1.35em;
+    opacity: .5;
+    margin: 0
+}
+
+h3.form_heading {
+    color: var(--heading-color);
+    margin-left: 7%;
+    margin-bottom: 35px;
+    padding-top: 25px;
+    position: relative
+}
+
+#submit_btn {
+    padding: 10px 0 10px 0;
+    font-size: 1.15em;
+    width: 60%;
+    margin: auto
+}
+
+div.image_thumbnail {
+    margin: 5px;
+    cursor: pointer;
+    position: relative;
+    border: 2px solid var(--text-color);
+    opacity: .9
+}
+
+div.thumbnail_delete {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    opacity: .9;
+    background-color: var(--text-color);
+    color: var(--error-color);
+    border: 1px solid var(--background-dark);
+    font-family: sans-serif;
+    padding: 0 1px 0 1px
+}
+
+div.thumbnail_delete:hover {
+    opacity: 1;
+    background-color: var(--background-dark)
+}
+
+div#for_sale_container {
+    position: absolute;
+    top: 63px;
+    right: 10%
+}
+
+br.mobile_ui,br.mobile_ui2,br.mobile_ui3 {
+    display: none
+}
+
+#for_sale_lbl {
+    position: absolute;
+    top: 33px;
+    color: var(--text-color);
+    left: -10px;
+    font-size: .8em
+}
+
+#select_lbl {
+    padding: 5px;
+    margin: 0;
+    margin-top: -10px;
+    width: 90%;
+    display: inline-block
+}
+
+.mobile_alt {
+    display: none
+}
+
+#icon_select {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 15px
+}
+
+.content_container {
+    clip-path: inset(0 11% 0 0)
+}
+
+#forsale_cbx {
+    position: absolute;
+    left: -40px;
+    top: 3px;
+    width: 35px
+}
+
+#dialog_container {
+    margin-top: 50px
+}
+
+.asset_delimiter {
+    position: absolute;
+    font-size: 2em;
+    color: var(--text-color);
+    left: -65px;
+    top: -20px
+}
+
+#description_container,#fullname_container {
+    width: 98%
+}
+
+input.user_info {
+    font-size: 1.5em;
+    width: 400px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin: auto;
+    display: block;
+    padding: 3px;
+    margin-bottom: 10px
+}
+
+#testnet_indicator {
+    position: absolute;
+    top: 0;
+    left: -50px;
+    font-size: 1.5em;
+    color: var(--mango-blue);
+    letter-spacing: 2px;
+    width: 500%;
+    overflow: hidden;
+    word-break: keep-all;
+    z-index: 30;
+    opacity: .5;
+    display: none
+}
+
+#issue_container {
+    min-width: 600px
+}
+
+.issue_btn {
+    font-size: 1.5em;
+    width: 200px;
+    margin: auto;
+    background-color: var(--button-background);
+    border-color: #000
+}
+
+#review_btn_container {
+    min-height: 100px;
+    padding-bottom: 25px
+}
+
+#upload_selector {
+    background-color: inherit;
+    color: var(--text-color);
+    font-size: 1em;
+    font-style: italic;
+    font-family: inherit
+}
+
+.upload_option {
+    color: var(--text-dark);
+    cursor: pointer
+}
+
+#metadata_heading {
+    display: inline-block;
+    margin-right: 30%
+}
+
+#nonstd_spec {
+    margin-left: 10%;
+    width: 80%;
+    display: none
+}
+
+#disp_nonspec,#disp_spec {
+    position: absolute;
+    visibility: hidden;
+    left: 5000%
+}
+
+#disp_nonspec+label,#disp_spec+label {
+    font-weight: 300;
+    font-size: 1.25em;
+    opacity: .8
+}
+
+#disp_nonspec+label:hover,#disp_spec+label:hover {
+    opacity: 1
+}
+
+#disp_nonspec:checked~#nonstd_spec {
+    display: block
+}
+
+#disp_nonspec:checked+label,#disp_spec:checked+label {
+    font-weight: 500;
+    opacity: 1
+}
+
+#disp_nonspec:checked~#std_spec {
+    display: none
+}
+
+#meta_file-upload-wrapper {
+    position: relative
+}
+
+#meta_upload_save {
+    background: var(--mango-blue);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1em;
+    padding: 10px 25px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-style: none;
+    position: absolute;
+    right: 15px;
+    top: 110px;
+    display: block;
+    text-align: center;
+    z-index: 50
+}
+
+#meta_file-upload-wrapper:after {
+    content: attr(data-text);
+    font-size: 18px;
+    background: #fff;
+    padding: 10px 15px;
+    display: block;
+    width: calc(100% - 40px);
+    pointer-events: none;
+    z-index: 20;
+    height: 40px;
+    line-height: 40px;
+    color: #999;
+    border-radius: 5px 10px 10px 5px;
+    font-weight: 300;
+    display: none
+}
+
+#meta_file-upload-wrapper:before {
+    content: 'Select File';
+    position: absolute;
+    top: 0;
+    right: 10px;
+    display: inline-block;
+    height: 45px;
+    background: #2196f3;
+    color: #fff;
+    font-weight: 700;
+    z-index: 25;
+    font-size: 16px;
+    line-height: 45px;
+    padding: 0 15px;
+    text-transform: uppercase;
+    pointer-events: none;
+    border-radius: 0 5px 5px 0
+}
+
+#meta_file-upload-wrapper:hover:before,#meta_upload_save:hover {
+    background-color: #2196f3
+}
+
+#meta_file-upload-wrapper input {
+    opacity: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    display: block;
+    cursor: pointer;
+    width: 100%
+}
+
+div#nonstd_hash {
+    font-size: 1.5em
+}
+
+@media (max-width: 1750px) {
+    div#sale_disp {
+        width:150px
+    }
+
+    .contract_type_lbl {
+        padding: 5px 0 5px 0
+    }
+}
+
+@media (max-width: 1625px) {
+    .content_container {
+        clip-path:inset(0 11% 0 0)
+    }
+
+    div#sale_disp {
+        width: 300px
+    }
+
+    br.mobile_ui {
+        display: inline
+    }
+
+    .radio_option {
+        margin-bottom: 10px
+    }
+
+    #contract_type_title {
+        position: absolute;
+        top: 60%
+    }
+
+    .btn_container {
+        margin-left: 15%
+    }
+
+    div#input_reissuable {
+        margin-right: 11%
+    }
+}
+
+@media (max-width: 1425px) {
+    br.mobile_ui2 {
+        display:inline
+    }
+
+    #contract_type_title {
+        position: absolute;
+        top: 50%
+    }
+
+    .btn_container {
+        margin-left: 10%
+    }
+
+    .asset_delimiter {
+        left: -55px
+    }
+
+    #metadata_heading {
+        margin-right: 25%
+    }
+}
+
+@media (max-width: 1225px) {
+    div#sale_disp {
+        width:175px
+    }
+
+    .btn_container {
+        margin-left: 15%
+    }
+
+    .asset_delimiter {
+        left: -45px
+    }
+}
+
+@media (max-width: 1000px) {
+    .radio_option {
+        display:block
+    }
+
+    br.mobile_ui {
+        display: none
+    }
+
+    .mobile_hide {
+        display: none
+    }
+
+    .mobile_alt {
+        display: block
+    }
+
+    .asset_delimiter {
+        left: -30px
+    }
+}
+
+@media (max-width: 768px) {
+    #issue_container {
+        min-width:auto;
+    }
+
+    #for_sale_lbl {
+        position: absolute;
+        color: #ccc;
+        width: 45px
+    }
+
+    #forsale_cbx {
+        position: absolute;
+        left: 10%;
+        top: 3px;
+        width: 35px
+    }
+
+    div#for_sale_container {
+        right: auto;
+        top: auto;
+        top: -95px
+    }
+
+    div#sale_disp {
+        width: 550px;
+        left: 45px;
+        position: absolute
+    }
+
+    div#for_sale_placeholder {
+        height: 95px
+    }
+
+    div#for_sale_container .checkbox {
+        left: 7px
+    }
+
+    div.left_field {
+        width: 80%;
+        display: block
+    }
+
+    div.right_field {
+        margin-top: 30px;
+        margin-left: 10%;
+        width: 80%
+    }
+
+    .btn_container {
+        margin-left: 25%
+    }
+
+    .contract_type_lbl {
+        padding: 5px 10px 5px 10px
+    }
+
+    #metadata_heading {
+        margin-right: 30%
+    }
+}
+
+@media (max-width: 600px) {
+    #metadata_heading {
+        margin-right:20%
+    }
+}
+
+@media (max-width: 500px) {
+    div#input_reissuable {
+        font-size:.9em
+    }
+
+    .contract_type_lbl {
+        padding: 10px 0 10px 0
+    }
+
+    div#input_qty {
+        margin-left: 10%;
+        width: 10%;
+        display: inline-block;
+        font-size: .8em
+    }
+
+    div#input_subunits {
+        width: 10%;
+        margin-left: 3%;
+        display: inline-block;
+        font-size: .8em
+    }
+
+    div#input_subunits label span {
+        margin-left: -15px
+    }
+
+    br.mobile_ui3 {
+        display: inline
+    }
+
+    .btn_container {
+        margin-left: 26%
+    }
+
+    #contract_type_title span {
+        font-size: .8em
+    }
+
+    .mobile_hide2 {
+        display: none
+    }
+
+    #icon_select {
+        margin-top: 25px
+    }
+
+    #metadata_heading {
+        margin-right: 5%
+    }
+}
+
+@media (max-width: 400px) {
+    div#input_reissuable {
+        font-size:.8em
+    }
+}
+
+@supports (-webkit-overflow-scrolling:touch) {
+    div#sale_disp {
+        width: 225px;
+        left: 45px
+    }
+
+    div.left_field {
+        margin-top: 40px
+    }
+
+    #ios_except {
+        font-size: 3em
+    }
+
+    #description_container {
+        margin-top: 35px;
+        width: 90%
+    }
+
+    #fullname_container {
+        width: 90%
+    }
+}
+
+@supports (-webkit-overflow-scrolling:touch) {
+    h2 {
+        font-size: 1.25em
+    }
+
+    #nameDiv,#subasset_container {
+        width: 80%
+    }
+
+    #description_container,#fullname_container {
+        width: 90%
+    }
+
+    div#name_indicator {
+        top: 2.25em;
+        right: 0%;
+    }
+}
