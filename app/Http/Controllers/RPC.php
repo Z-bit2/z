@@ -193,7 +193,7 @@ class RPC extends Controller
                     }
                     else{
                         $temp = intval($amount);
-                        DB::insert('insert into all_asset_transactions (asset_name, amount, admin_token_role, owner) values(?, ?, ?, ?)', [$asset_symbol, $temp, 1, $new_owner]);
+                        DB::insert('insert into all_asset_transactions (asset_name, amount, admin_token_role, owner) values(?, ?, ?, ?)', [$asset_symbol, $amount, 1, $new_owner]);
                         return "success";
                     }
                 }
@@ -421,14 +421,14 @@ class RPC extends Controller
                 curl_close($curl);
                 $decoded_result=json_decode($result, true);
 
-                $current_amount = $decoded_result["result"];
+                $wallet_amount = $decoded_result["result"];
 
                 $sql_query = 'select * from site_users where seed="'.$seed.'"';
                 $users = DB::select($sql_query);
 
                 if(count($users) > 0){
                     $myaddress = $users[0]->wallet_address;
-                    if(floatval($current_amount) < floatval(525)){
+                    if(floatval($wallet_amount) < floatval(525)){
                         // return response()->json($decoded_result, 200);
                         return "Charge Error";
                     }
@@ -478,18 +478,17 @@ class RPC extends Controller
                 $decoded_result=json_decode($result, true);
 
                 if($decoded_result["error"] == null){
-                    $new_generated_amount = intval($new_amount) + intval($current_amount);
                     DB::table('asset_list')->where(['admin' => $seed, 'asset_name' => $asset_name])->update(array('amount'=>$new_generated_amount, 'unit'=>$new_unit, 'reissuable'=>$reissuable, 'ipfs'=>$new_ipfs));
 
                     $sql_query = 'select * from all_asset_transactions where owner="'.$seed.'" and asset_name="'.$asset_name.'"';
                     $users = DB::select($sql_query);
 
                     if(count($users) > 0){
-                        $temp = intval($current_amountt) + intval($new_amount);
+                        $temp = intval($current_amount) + intval($new_amount);
                         DB::table('all_asset_transactions')->where(['asset_name' => $asset_name, 'owner'=>$seed])->update(array('amount'=>$temp));
                     }
                     else{
-                        DB::insert('insert into all_asset_transactions (asset_name, amount, admin_token_role, owner) values(?, ?, ?, ?)', [$asset_name, $new_generated_amount, 2, $seed]);
+                        DB::insert('insert into all_asset_transactions (asset_name, amount, admin_token_role, owner) values(?, ?, ?, ?)', [$asset_name, $new_amount, 2, $seed]);
                     }
                     return "success";
                 }

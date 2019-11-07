@@ -972,8 +972,11 @@
 
                             temp += '<div class="asset_qty">';
                             temp += '<span class="dropbtn" onclick="myFunction('+i+')"><i class="fa fa-cog" style="font-size:40px;"></i></span>';
-                            temp += '<div id="myDropdown'+i+'" class="dropdown-content"><a href="#" class="transfer_admin">Transfer Admin</a><a href="#" class="reissue_asset">Reissue</a></div>';
-                            temp += '</div>';
+                            temp += '<div id="myDropdown'+i+'" class="dropdown-content"><a href="#" class="transfer_admin">Transfer Admin</a>';
+                            if(result[i].reissuable == 1){
+                                temp += '<a href="#" class="reissue_asset">Reissue</a>';
+                            }
+                            temp += '</div></div>';
                             temp += '</div>';
                         }
                         $('#admin_list').html(temp);
@@ -1673,7 +1676,6 @@ var reissue_asset = function(){
 
         },
         success:function(res, status){
-            console.log(res);
             if(res != "success"){
                 alert("Something went wrong! Try again!");
                 $("#confirm_reissue").prop("disabled", false);

@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="">
     <meta keywords= "keywords">
-    <meta property="og:title" content="Mango Farm - Blockchain Assets Made Easy">
-    <meta property="og:description" content="Mango Farm makes creating and storing blockchain assets easy. Powered by Ravencoin.">
+    <meta property="title" content="Mango Farm - Blockchain Assets Made Easy">
+    <meta property="description" content="Mango Farm makes creating and storing blockchain assets easy. Powered by Ravencoin.">
     <meta property="og:image" content="{{ url('/images/mangobird.png') }}" >
     <link rel="shortcut icon" href="{{ url('/images/mangobird.png') }}">
     <!-- <link rel="stylesheet" href="/assets/css/mango.min.css">      -->
