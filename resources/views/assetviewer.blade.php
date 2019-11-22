@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Mango Farm  | MangoWallet')
+@section('title', 'FREXA  | FrexaWallet')
 
 @section('content')
 <script type="text/javascript" src="{{ url('js/jquery.min.js') }}"></script>
@@ -107,15 +107,18 @@
 
       <div id="asset_container">
         <div id="asset_header" class="centered" style="border-bottom:1px solid #aaa; padding-bottom:10px; height:65px;position: relative; width:100%;">
+
           <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
+            <img id="avater" class="modal_asset_icon" src="" height="64" width="64" style="margin: auto;">
             <a>
               <div id="asset_symbol" class="asset_symbol" style="margin-bottom:5px;">
                 ASA
               </div>
-            </a>
-            <div id="asset_detail" style="font-weight:300;">
+              <div id="asset_detail" style="font-weight:300;">
               Qty: 1 | Units: 0 | Reissuable
             </div>
+            </a>
+
           </div>
         </div>
         <div style="margin:25px;">
@@ -124,6 +127,9 @@
             http://ravencoinipfs.com/ipfs/QmS7dEFEKKy61ggFYMa3cusH7UT5EnoxG5nYAFnGKfZtgF
           </span>
         </div>
+        <div id="meta_data">
+        </div>
+
       </div>
     </div>
   </div>
@@ -179,6 +185,19 @@
         modal_flag = 1;
       }
     }
+    $(".input__field").on("keyup", function(){
+      id = $(this).parent().attr("id");
+      if($(this).val() != ""){
+        $(this).parent().children(".input__label--haruki2").children('.input__label-content--haruki2').css("-webkit-transform", "translate3d(0,-2.2em,0)");
+        $(this).parent().children(".input__label--haruki2").children('.input__label-content--haruki2').css("transform", "translate3d(0,-2.2em,0)");
+      }
+      else{
+        $(this).parent().children(".input__label--haruki2").children('.input__label-content--haruki2').css("-webkit-transform", "");
+        $(this).parent().children(".input__label--haruki2").children('.input__label-content--haruki2').css("transform", "");
+        $(this).parent().children(".input__label--haruki2").children('.input__label-content--haruki2').css("-webkit-transition", "-webkit-transform .3s");
+        $(this).parent().children(".input__label--haruki2").children('.input__label-content--haruki2').css("transition", "-webkit-transform .3s");
+      }
+    });
   });
 
   var change_asset = function(){
@@ -211,18 +230,86 @@
             asset_name : $(this).html()
           },
           success:function(res, status){
-            console.log(res);
-            $("#asset_symbol").html(res["name"]);
+            $("#asset_symbol").html(res[0]["name"]);
             temp = '';
-            temp += "Qty: " + res["amount"] + " | Units: " + res["units"] + " | ";
-            temp += res["reissuable"]?"Reissuable":"Not Reissuable";
+            temp += "Qty: " + res[0]["amount"] + " | Units: " + res[0]["units"] + " | ";
+            temp += res[0]["reissuable"]?"Reissuable":"Not Reissuable";
             $("#asset_detail").html(temp);
-            if(res["has_ipfs"]){
-              $("#ipfs_data").html(res["ipfs_hash"]);
+            if(res[0]["has_ipfs"]){
+              $("#ipfs_data").html(res[0]["ipfs_hash"]);
             }
             else{
               $("#ipfs_data").html("No IPFS Data");
             }
+
+            if(res[1] == "NO"){
+              var temp = "";
+              temp += '<div style="margin:15px; text-align:center;">No Meta Data</div>';
+              $("#meta_data").html(temp);
+              $("#avater").css("display", "none");
+            }
+            else{
+              var temp = "";
+              if(res[1]["avatar_url"] == "" || res[1]["avatar_url"] == null){
+                $("#avater").css("display", "none");
+              }
+              else{
+                $("#avater").css("display", "block");
+                $("#avater").attr("src", "/upload_img/" + res[1]["avatar_url"]);
+              }
+              if(res[1]["full_asset_name"] != "" || res[1]["full_asset_name"] != null){
+                temp += '<div style="margin:15px;">Full Asset Name:<span class="opacity" style="color:#2196F3;font-weight:300;">' + res[1]["full_asset_name"] + '</span></div>';
+              }
+              if(res[1]["description"] != "" || res[1]["description"] != null){
+                temp += '<div style="margin:15px;">Description:<span class="opacity" style="color:#2196F3;font-weight:300;">' + res[1]["description"] + '</span></div>';
+              }
+              if(res[1]["issuer"] != "" || res[1]["issuer"] != null){
+                temp += '<div style="margin:15px;">Issuer:<span class="opacity" style="color:#2196F3;font-weight:300;">' + res[1]["issuer"] + '</span></div>';
+              }
+              if(res[1]["website_url"] != "" || res[1]["website_url"] != null){
+                temp += '<div style="margin:15px;">Website Url:<span class="opacity" style="color:#2196F3;font-weight:300;">' + res[1]["website_url"] + '</span></div>';
+              }
+              if(res[1]["image_url"] != "" || res[1]["image_url"] != null){
+                temp += '<div style="margin:15px;">Image Url:<span class="opacity" style="color:#2196F3;font-weight:300;">' + res[1]["image_url"] + '</span></div>';
+              }
+              if(res[1]["contact_address"] != "" || res[1]["contact_address"] != null){
+                temp += '<div style="margin:15px;">Contact Address:<span class="opacity" style="color:#2196F3;font-weight:300;">' + res[1]["contact_address"] + '</span></div>';
+              }
+              if(res[1]["contact_email"] != "" || res[1]["contact_email"] != null){
+                temp += '<div style="margin:15px;">Contact Email:<span class="opacity" style="color:#2196F3;font-weight:300;">' + res[1]["contact_email"] + '</span></div>';
+              }
+              if(res[1]["contact_name"] != "" || res[1]["contact_name"] != null){
+                temp += '<div style="margin:15px;">Contact Name:<span class="opacity" style="color:#2196F3;font-weight:300;">' + res[1]["contact_name"] + '</span></div>';
+              }
+              if(res[1]["contact_phone"] != "" || res[1]["contact_phone"] != null){
+                temp += '<div style="margin:15px;">Contact Phone:<span class="opacity" style="color:#2196F3;font-weight:300;">' + res[1]["contact_phone"] + '</span></div>';
+              }
+              if(res[1]["contact_url"] != "" || res[1]["contact_url"] != null){
+                temp += '<div style="margin:15px;">Contact Url:<span class="opacity" style="color:#2196F3;font-weight:300;">' + res[1]["contact_url"] + '</span></div>';
+              }
+              if(res[1]["restricted"] != "" || res[1]["restricted"] != null){
+                temp += '<div style="margin:15px;">Restricted:<span class="opacity" style="color:#2196F3;font-weight:300;">' + res[1]["restricted"] + '</span></div>';
+              }
+              if(res[1]["sale_price"] != "" || res[1]["sale_price"] != null){
+                temp += '<div style="margin:15px;">Sale Price:<span class="opacity" style="color:#2196F3;font-weight:300;">' + res[1]["sale_price"] + '</span></div>';
+              }
+              if(res[1]["type"] != "" || res[1]["type"] != null){
+                temp += '<div style="margin:15px;">Type:<span class="opacity" style="color:#2196F3;font-weight:300;">' + res[1]["type"] + '</span></div>';
+              }
+
+              switch(res[1]["contract_type"]){
+                case 0:
+                break;
+                case 1:
+                  temp += '<div style="margin:15px;">Contract Form:<span class="opacity" style="color:#2196F3;font-weight:300;">Created One</span></div>';
+                break;
+                case 2:
+                  temp += '<div style="margin:15px;">Contract Form:<span class="opacity" style="color:#2196F3;font-weight:300;">Uploaded File(IPFS)</span></div>';
+                break;
+              }
+              $("#meta_data").html(temp);
+            }
+
             $("#asset_info").css("display", "block");
             $("#asset_info").css("opacity", "1");
             modal_flag = 2;

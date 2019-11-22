@@ -1,9 +1,9 @@
 @extends('layouts.main')
 
-@section('title', 'Mango Farm  | MangoWallet')
+@section('title', 'Frexa | FrexaWallet')
 
 @section('content')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style>
     .dropbtn {
     background-color: transparent;
@@ -119,7 +119,7 @@
 </style>
 <script type="text/javascript" src="{{ url('js/jquery.min.js') }}"></script>
 <div id="body_container">
- 	<link rel="stylesheet" href="{{ url('/css/mangowallet.min.css') }}">
+ 	<link rel="stylesheet" href="{{ url('/css/frexawallet.min.css') }}">
 	<div class="content_container" style="padding-top:20px;">
 		@if(!Session::has('seed'))
 		<div id="toolbar" style="width:80%; margin:auto;">
@@ -997,6 +997,10 @@
                             $("#confirm_reissue").prop("disabled", false);
                             $(".reissue_input1").removeClass('warn_in');
                             document.getElementById($(this).parent().attr("id")).classList.toggle("show");
+                            $("#new_unit").val("");
+                            $("#new_amount").val("");
+                            $("#new_ipfs_hash").val("");
+                            old_amount = res["amount"];
 
                             $.ajax({
                                 headers:{
@@ -1013,6 +1017,7 @@
                                         alert("something goes wrong!");
                                     }
                                     else{
+
                                         $("#new_unit").attr("placeholder", "Current Unit is " + res["unit"]);
                                         $("#new_amount").attr("placeholder", "Current Amount is " + res["amount"]);
                                         old_amount = res["amount"];
@@ -1597,51 +1602,6 @@ var reissue_asset = function(){
         }
     });
 
-    if($("#new_unit").val() < 1){
-        temp = 1;
-        $("#new_unit").addClass('warn_in');
-    }
-
-    if($("#new_amount").val() < 1){
-        temp = 1;
-        $("#new_amount").addClass('warn_in');
-    }
-
-    if(temp == 1){
-        return;
-    }
-
-    pin = "" + $("#reissue_pin1").val() + $("#reissue_pin2").val() + $("#reissue_pin3").val() + $("#reissue_pin4").val();
-
-
-    $.ajax({
-        headers:{
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        type : 'POST',
-        url : '/try_reissue',
-        data : {
-            _token : "<?php echo csrf_token() ?>",
-
-        },
-        success:function(res, status){
-            if(status == "success"){
-                $("#new_ipfs_hash").val(res);
-            }
-        }
-    });
-    $("#confirm_reissue").prop("disabled", true);
-}
-
-var reissue_asset = function(){
-    var temp = 0;
-    $.each($(".reissue_input1"), function(){
-        if($(this).val() == ""){
-            $(this).addClass("warn_in");
-            temp = 1;
-        }
-    });
-
     if($("#new_unit").val() < -1 || $("#new_unit").val() > 8){
         temp = 1;
         $("#new_unit").addClass('warn_in');
@@ -1676,6 +1636,7 @@ var reissue_asset = function(){
 
         },
         success:function(res, status){
+            console.log(res);
             if(res != "success"){
                 alert("Something went wrong! Try again!");
                 $("#confirm_reissue").prop("disabled", false);

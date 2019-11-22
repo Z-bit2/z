@@ -3,7 +3,7 @@
     <div class="header_content">
       <a href="/">
       <div id="header_title" class='absolute v_center'>
-        <div id="logo_link" class="absolute v_center"></div>
+        <!-- <div id="logo_link" class="absolute v_center"></div> -->
         <span id="logo_title">
           <span class="title title_primary">FREXA</span>
           <!-- <span class="title title_secondary">Farm</span> -->
@@ -21,9 +21,9 @@
       </div>
     </div>
       <div id="nav_links" class="absolute v_center right">
-        <a class="neon nav_link" id="mangowallet_nav" href="/mangowallet"><span class="link_mobile_hide">FREXA </span>Wallet</a>
-        <a class="neon nav_link" id="assetbuilder_nav" href="/assetbuilder"><span class="link_mobile_hide">Upload </span>Property</a>
-        <a class="neon nav_link" id="assetviewer_nav" href="/assetviewer"><span class="link_mobile_hide">View </span>Property</a>
+        <a class="neon nav_link" id="mangowallet_nav" href="/frexawallet"><span class="link_mobile_hide">FREXA </span>Wallet</a>
+        <a class="neon nav_link" id="assetbuilder_nav" href="/uploadproperty"><span class="link_mobile_hide">Upload </span>Property</a>
+        <a class="neon nav_link" id="assetviewer_nav" href="/propertyviewer"><span class="link_mobile_hide">View </span>Property</a>
       </div>
     </div>
   </div>

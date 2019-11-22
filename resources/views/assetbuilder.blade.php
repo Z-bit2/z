@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Mango Farm  | AssetBuilder')
+@section('title', 'FREXA | Upload Property')
 
 @section('content')
 
@@ -84,7 +84,7 @@
 		            <div class="thumbnail_delete" title="Delete this image" style="opacity: 1;" onclick="delete_image();">X</div>
 	          	</div>
 	          </div>
-	              <input id="files-upload" type="file" style='display:none;' onchange="readURL(this);">
+	              <input id="files-upload" type="file" style='display:none;' name="image" onchange="readURL(this);" accept="image/x-png,image/gif,image/jpeg">
 	              <input type="hidden" name="icon" id="icon_data">
 	          </div>
 	          <div id="input_namedesc">
@@ -185,21 +185,31 @@
 	          <span id="contract_type_title">Legal <br class="mobile_ui3">Document<br class="mobile_ui2"><span>(choose one):</span></span>
 	          <div class='btn_container'>
 	            <label class='radio_option' for="enter_url_btn">
-	              <input type="radio" name="contract_type" value="enter_url" id="enter_url_btn" class="contract_type" onclick="enter_contact_url();">
-	              <label for="enter_url_btn" class="btn-6 contract_type_lbl"><span class="btn_label">Enter Contract URL</span><span class="filler"></span></label>
+					<input type="radio" name="contract_type" value="enter_url" id="enter_url_btn" class="contract_type" onclick="enter_contact_url();">
+					<label for="enter_url_btn" class="btn-6 contract_type_lbl">
+						<span class="btn_label">Enter Contract URL</span><span class="filler"></span>
+					</label>
 	            </label>
-	            <div class='radio_option'>
+	            <!-- <div class='radio_option'>
 	              <input type="radio" name="contract_type" value="use_sample" id="use_sample_btn" class="contract_type">
 	              <label for="use_sample_btn" class="btn-6 contract_type_lbl"><span class="btn_label">Use Sample Form</span><span class="filler"></span></label>
+	            </div> -->
+
+	            <div class='radio_option'>
+					<input type="radio" name="contract_type" value="generate_contract" id="create_new_btn" class="contract_type" onclick="create_new_contract();">
+					<label for="create_new_btn" class="btn-6 contract_type_lbl">
+						<span class="btn_label">Create New Contract</span>
+						<span class="filler"></span>
+					</label>
 	            </div>
 	            <br class='mobile_ui'>
 	            <div class='radio_option'>
-	              <input type="radio" name="contract_type" value="generate_contract" id="create_new_btn" class="contract_type">
-	              <label for="create_new_btn" class="btn-6 contract_type_lbl"><span class="btn_label">Create New Contract</span><span class="filler"></span></label>
-	            </div>
-	            <div class='radio_option'>
-	              <input type="radio" name="contract_type" value="upload_pdf" id="upload_file_btn" class="contract_type">
-	              <label for="upload_file_btn" class="btn-6 contract_type_lbl"><span class="btn_label">Upload Document</span><span class="filler"></span></label>
+					<input type="radio" name="contract_type" value="upload_pdf" id="upload_file_btn" class="contract_type" onclick="$('#upload_for_contract').click();">
+					<label for="upload_file_btn" class="btn-6 contract_type_lbl">
+						<span class="btn_label">Upload Document</span>
+						<span class="filler"></span>
+					</label>
+					<input type="file" id="upload_for_contract" onclick="upload_for_contract1(this);" style="display: none;" />
 	            </div>
 	          </div>
 	        </div>
@@ -253,6 +263,58 @@
     </div>
 </div>
 
+<script src="https://cdn.tiny.cloud/1/dy484tcnsrw0w6wu8up5zqqqtldhgw2uz5d0xm5ctwikx0z4/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script type="text/javascript">
+	tinymce.init({
+		selector: 'textarea#basic-example',
+		height: 500,
+		menubar: false,
+		branding : false,
+		plugins: [
+			'advlist autolink lists link image charmap print preview anchor',
+			'searchreplace visualblocks code fullscreen',
+			'insertdatetime media table paste code help wordcount'
+		],
+		toolbar: 'undo redo | formatselect | ' +
+			' bold italic backcolor | alignleft aligncenter ' +
+			' alignright alignjustify | bullist numlist outdent indent |' +
+			' removeformat | help',
+		content_css: [
+			'//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+			'//www.tiny.cloud/css/codepen.min.css'
+		],
+		init_instance_callback : function(editor) {
+			console.log("Hi");
+		}
+	});
+</script>
+<style type="text/css">
+	.btn-alt {
+	    font-size: 1.15em;
+	    display: inline-block;
+	    border-color: #2196F3;
+	    -webkit-appearance: none;
+	}
+</style>
+<div class="modal" id="contract_dialog">
+    <label class="modal__bg" for="modal-1"></label>
+    <div class="modal__inner" id="modal__inner">
+        <label class="modal__close" for="modal-1" onclick='$("#contract_dialog").css("display", "none");
+		$("#contract_dialog").css("opacity", 0);'></label>
+        <div id="modal_content" style="margin-top: 40px;">
+            <textarea id="basic-example">
+
+			</textarea>
+			<div class="editor_tools" style="text-align:center; margin-top: 10px;">
+				<form id="contract_data">
+					<input type="button" class="btn-6 btn-alt modal-btn" id="genContract_btn" value="Attach Document" onclick="saveDocument();">
+					<input type="button" class="btn-6 btn-alt modal-btn" value="Clear Text" onclick="tinyMCE.get('basic-example').setContent('');">
+				</form>
+			</div>
+        </div>
+    </div>
+</div>
+
 <style>
 	.custom-alert{
 		border: solid 0.5px red;
@@ -262,6 +324,8 @@
 	var assets = [];
 	var issue_flag = 2;
 	var ajax_data = {};
+	ajax_data['contract_type'] = 0;
+	var image_file;
 
 	var open_try = function(){
 		flag = 0;
@@ -302,11 +366,12 @@
 		restricted = $('#restricted').val();
 		reissuable = $('#cbx').prop('checked')?1:0;
 		ipfs = $('#nonstd_hash').val();
+		sale_price = $("#cbx2").prop("checked")?$("#forsale_price").val():"";
 
 		var temp = '';
 		temp += '<div id="testnet_indicator">--TESTNET--TESTNET--TESTNET--TESTNET--TESTNET--TESTNET--TESTNET--TESTNET--TESTNET--TESTNET--TESTNET--TESTNET--</div>';
 		temp += '<div id="dialog_container">';
-		temp += '<div class="centered" id="issue_header">Review and Issue your Asset...</div>';
+		temp += '<div class="centered" id="issue_header">Review and Issue your Asset ' + asset_symbol + '</div>';
 		temp += '<div class="centered" style="margin-bottom:10px;">(Will use 525 RVN)</div>';
 		temp += '<div id="funding_msg" class="centered"></div>';
 		temp += '<div id="issue_container" style="margin-bottom:25px;">';
@@ -315,6 +380,7 @@
 		if(img_url != ''){
 			temp += '<img src="' + img_url + '" style="margin-right:15px; width: 32px; height: 32px;">';
 		}
+
 		temp += full_asset_name;
 		temp += '</h2>';
 		temp += '<div>Qty: ' + asset_qty + ' | Units: ' + asset_sub_units  + ' | ';
@@ -369,10 +435,17 @@
 			temp += '</div>';
 		}
 
+		if(contact_email != ""){
+			temp += '<div class="field_div">';
+			temp += '<div style="display:inline-block;"><strong>Contact Email:</strong>&nbsp;</div>';
+			temp += '<div style="display:inline-block;font-weight:300;">' + contact_email + '</div>';
+			temp += '</div>';
+		}
+
 		if(contact_phone != ""){
 			temp += '<div class="field_div">';
 			temp += '<div style="display:inline-block;"><strong>Contact Phone:</strong>&nbsp;</div>';
-			temp += '<div style="display:inline-block;font-weight:300;">' + contact_address + '</div>';
+			temp += '<div style="display:inline-block;font-weight:300;">' + contact_phone + '</div>';
 			temp += '</div>';
 		}
 
@@ -390,6 +463,13 @@
 			temp += '</div>';
 		}
 
+		if(sale_price != ""){
+			temp += '<div class="field_div">';
+			temp += '<div style="display:inline-block;"><strong>Sale Price:</strong>&nbsp;</div>';
+			temp += '<div style="display:inline-block;font-weight:300;">' + sale_price + '</div>';
+			temp += '</div>';
+		}
+
 		temp += '</div>';
 		temp += '</div>';
 		temp += '<div id="review_btn_container">';
@@ -402,7 +482,6 @@
 		ajax_data['asset_symbol'] = asset_symbol;
 		ajax_data['asset_qty'] = asset_qty;
 		ajax_data['asset_sub_units'] = asset_sub_units;
-		ajax_data['avatar_url'] = img_url;
 		ajax_data['full_asset_name'] = full_asset_name;
 		ajax_data['description'] = description;
 		ajax_data['issuer'] = issuer;
@@ -415,7 +494,7 @@
 		ajax_data['type'] = type;
 		ajax_data['restricted'] = restricted;
 		ajax_data['reissuable'] = reissuable;
-		ajax_data['sale_price'] = $("#cbx2").prop("checked")?$("#forsale_price").val():"";
+		ajax_data['sale_price'] = sale_price;
 		ajax_data['ipfs'] = ipfs;
 
 		$('#issue_dialog').css('display', 'block');
@@ -424,6 +503,12 @@
 	}
 
 	$(document).ready(function(){
+		// var freeTiny = document.querySelector('.tox .tox-notification--in');
+  //  			freeTiny.style.display = 'none';
+  		$('.tox').click(function(){
+  			console.log("Hey");
+  		})
+
 		$("#cbx2").on("change", function(e){
 			if($(this).prop("checked")){
 				$("#forsale_price").prop("disabled", false);
@@ -479,18 +564,33 @@
 				$(this).parent().children(".input__label--haruki2").children('.input__label-content--haruki2').css("transition", "-webkit-transform .3s");
 			}
 		});
+
+		$(".input__field").on("focus", function(){
+			$(this).removeClass('custom-alert');
+		});
+
+		$("#contract_url").on("keyup", function(){
+			ajax_data['contract_type'] = 1;
+		});
 	});
 
 	var readURL = function(input){
 		if (input.files && input.files[0]) {
 	        var reader = new FileReader();
 	        reader.onload = function (e) {
+	        	var images = $.grep(input.files, function(file) {
+			        return file.type.indexOf("image/") === 0;
+			    });
+			    if(images.length == 0){
+			    	return;
+			    }
+
 	            $('#upload_img').attr('src', e.target.result);
+		        $("#upload_label").css("display", "none");
+		        $("#img_tag").css("display", "block");
 	        };
 	        reader.readAsDataURL(input.files[0]);
-
-	        $("#upload_label").css("display", "none");
-	        $("#img_tag").css("display", "block");
+	        image_file = input.files[0];
 	    }
 	}
 
@@ -531,24 +631,56 @@
 	}
 
 	var try_create = function(){
+		var formData = new FormData();
+		formData.append('image', image_file);
+		if (ajax_data['contract_type'] == 0 ) {
+			ajax_data['contract_content'] = '';
+		}
+		if (ajax_data['contract_type'] == 1 && $("#contract_url").val() == '') {
+			ajax_data['contract_type'] = 0;
+			ajax_data['contract_content'] = '';
+		}
+		if (ajax_data['contract_type'] == 1 && $("#contract_url").val() != '') {
+			ajax_data['contract_type'] = 1;
+			ajax_data['contract_content'] = $("#contract_url").val();
+		}
 		$.ajax({
-	      headers:{
-	        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-	      },
-	      type : 'POST',
-	      url : '/try_create_asset',
-	      data : {
-	        _token : "<?php echo csrf_token() ?>",
-	        data : ajax_data
-	      },
-	      success:function(res, status){
-	      	if(res == "success"){
-	      		window.location.reload(true);
-	      	}
-	      	else{
-	      		alert(res);
-	      	}
-	      }
+			headers:{
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+			type : 'POST',
+			url : "{{ route('image_upload.action') }}",
+			data : formData,
+			contentType: false,
+			cache: false,
+			processData: false,
+			success:function(res, status){
+				if(res != "failed"){
+					ajax_data['avatar_url'] = res;
+					$.ajax({
+						headers:{
+							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						},
+						type : 'POST',
+						url : '/try_create_asset',
+						data : {
+							_token : "<?php  ?>",
+							data : ajax_data
+						},
+						success:function(res, status){
+							if(res == "success"){
+								window.location.reload(true);
+							}
+							else{
+								alert(res);
+							}
+						}
+					});
+				}
+				else{
+					alert("Image Upload Failed");
+				}
+			}
 	    });
 	}
 
@@ -622,6 +754,62 @@
 	var enter_contact_url = function(){
 		$("#contract_url").attr("disabled", false);
 		$("#contract_url_container").css("opacity", 1);
+
+		ajax_data['contract_content'] = "";
+		ajax_data['contract_type'] = 1;
+	}
+
+	var create_new_contract = function(){
+		tinyMCE.get('basic-example').setContent('');
+
+		$("#contract_dialog").css("display", "block");
+		$("#contract_dialog").css("opacity", 1);
+	}
+
+	function upload_for_contract1(input){
+		if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+	            $.ajax({
+			      headers:{
+			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			      },
+			      type : 'POST',
+			      url : '/get_ipfs',
+			      data : {
+			        _token : "<?php echo csrf_token() ?>",
+			        file : e.target.result
+			      },
+			      success:function(res, status){
+			      	if(status == "success"){
+			      		$("#contract_url").val(res);
+			      		$("#contract_url").parent().children(".input__label--haruki2").children('.input__label-content--haruki2').css("-webkit-transform", "translate3d(0,-2.2em,0)");
+						$("#contract_url").parent().children(".input__label--haruki2").children('.input__label-content--haruki2').css("transform", "translate3d(0,-2.2em,0)");
+						$("#contract_url").attr("disabled", false);
+						$("#contract_url_container").css("opacity", 1);
+
+						ajax_data['contract_content'] = res;
+						ajax_data['contract_type'] = 3;
+			      	}
+			      }
+			    });
+	        };
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+
+	var saveDocument = function(){
+		content = tinyMCE.get('basic-example').getContent();
+		if(content == ""){
+			alert("Empty!!!");
+		}
+
+		else{
+			ajax_data['contract_content'] = content;
+			ajax_data['contract_type'] = 2;
+			$("#contract_dialog").css("display", "none");
+			$("#contract_dialog").css("opacity", 0);
+		}
 	}
 </script>
 @endsection

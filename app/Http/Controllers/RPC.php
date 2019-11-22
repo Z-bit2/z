@@ -60,9 +60,12 @@ class RPC extends Controller
         $seed = $request->session()->get('seed');
         $myaddress = "";
 
-        if(!isset($seed)){
-            return "unkown";
-        }
+        $ipfs = $data['ipfs'];
+        $asset_symbol = $data['asset_symbol'];
+        $asset_unit = intval($data['asset_sub_units']);
+        $asset_quantity = intval($data['asset_qty']);
+        $reissuable = $data['reissuable'];
+
 
         $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "getbalance", "params" => [$seed] );
         $curl = curl_init();
@@ -109,12 +112,6 @@ class RPC extends Controller
         $info = curl_getinfo($curl);
         curl_close($curl);
 
-        $ipfs = $data['ipfs'];
-        $asset_symbol = $data['asset_symbol'];
-        $asset_unit = intval($data['asset_units']);
-        $asset_quantity = intval($data['asset_quantity']);
-        $reissuable = $data['reissuable'];
-
         if($reissuable)
             $reissuable = 1;
         else
@@ -144,7 +141,7 @@ class RPC extends Controller
         if($decoded_result["error"] == null){
             DB::insert('insert into all_asset_transactions (asset_name, amount, admin_token_role, owner) values(?, ?, ?, ?)', [$asset_symbol, $asset_quantity, 2, $seed]);
 
-            DB::insert('insert into asset_list (asset_name, amount, unit, avatar_url, full_asset_name, description, issuer, website_url, image_url, contact_name, contact_address, contact_email, contact_phone, type, restricted, reissuable, ipfs, contact_url, sale_price, admin) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [$data['asset_symbol'], $data['asset_qty'], $data['asset_sub_units'], '', $data['full_asset_name'], $data['description'], $data['issuer'], $data['website_url'], $data['image_url'], $data['contact_name'], $data['contact_address'], $data['contact_email'], $data['contact_phone'], $data['type'], $data['restricted'], $data['reissuable'], $data['ipfs'], '', $data['sale_price'], $seed]);
+            DB::insert('insert into asset_list (asset_name, amount, unit, avatar_url, full_asset_name, description, issuer, website_url, image_url, contact_name, contact_address, contact_email, contact_phone, type, restricted, reissuable, ipfs, contact_url, sale_price, admin, contract_content, contract_type) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [$data['asset_symbol'], $data['asset_qty'], $data['asset_sub_units'], $data['avatar_url'], $data['full_asset_name'], $data['description'], $data['issuer'], $data['website_url'], $data['image_url'], $data['contact_name'], $data['contact_address'], $data['contact_email'], $data['contact_phone'], $data['type'], $data['restricted'], $data['reissuable'], $data['ipfs'], '', $data['sale_price'], $seed, $data['contract_content'], intval($data['contract_type'])]);
 
             return "success";
         }
@@ -322,7 +319,22 @@ class RPC extends Controller
         curl_close($curl);
         $decoded_result=json_decode($result, true);
 
-        return $decoded_result["result"];
+        $res = array();
+        array_push($res, $decoded_result["result"]);
+
+        $sql_query = 'select * from asset_list where asset_name="'.$asset_name.'"';
+        $users = DB::select($sql_query);
+
+        if(count($users) > 0)
+        {
+            array_push($res, $users[0]);
+        }
+
+        else{
+            array_push($res, "NO");
+        }
+
+        return $res;
     }
 
     public function transfer_admin(Request $request){
@@ -428,7 +440,7 @@ class RPC extends Controller
 
                 if(count($users) > 0){
                     $myaddress = $users[0]->wallet_address;
-                    if(floatval($wallet_amount) < floatval(525)){
+                    if(floatval($wallet_amount) < floatval(125)){
                         // return response()->json($decoded_result, 200);
                         return "Charge Error";
                     }
@@ -437,18 +449,18 @@ class RPC extends Controller
                     return "DB error";
                 }
 
-                $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "move", "params" => [$seed, "", 525] );
-                $curl = curl_init();
-                curl_setopt($curl, CURLOPT_POST, 1);
-                curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-                curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-                curl_setopt($curl, CURLOPT_USERPWD, "trey" . ":" . "trey2019raven");
-                curl_setopt($curl, CURLOPT_URL, 'http://34.217.223.244:8766/');
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($request_data));
-                $result = curl_exec($curl);
-                $info = curl_getinfo($curl);
-                curl_close($curl);
+                // $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "move", "params" => [$seed, "", 100] );
+                // $curl = curl_init();
+                // curl_setopt($curl, CURLOPT_POST, 1);
+                // curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+                // curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+                // curl_setopt($curl, CURLOPT_USERPWD, "trey" . ":" . "trey2019raven");
+                // curl_setopt($curl, CURLOPT_URL, 'http://34.217.223.244:8766/');
+                // curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                // curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($request_data));
+                // $result = curl_exec($curl);
+                // $info = curl_getinfo($curl);
+                // curl_close($curl);
 
                 if($reissuable){
                     $reissuable = true;
@@ -456,6 +468,7 @@ class RPC extends Controller
                 else{
                     $reissuable = false;
                 }
+                //Reissue the asset with RPC command
                 if($new_ipfs == ""){
                     $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "reissue", "params" => [$asset_name, $new_amount, $myaddress, $myaddress, $reissuable, $new_unit] );
                 }
@@ -463,9 +476,7 @@ class RPC extends Controller
                     $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "reissue", "params" => [$asset_name, $new_amount, $myaddress, $myaddress, $reissuable, $new_unit, $new_ipfs] );
                 }
                 $curl = curl_init();
-                    // We POST the data
                 curl_setopt($curl, CURLOPT_POST, 1);
-                // set header
                 curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
                 curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
                 curl_setopt($curl, CURLOPT_USERPWD, "trey" . ":" . "trey2019raven");
@@ -478,12 +489,14 @@ class RPC extends Controller
                 $decoded_result=json_decode($result, true);
 
                 if($decoded_result["error"] == null){
-                    DB::table('asset_list')->where(['admin' => $seed, 'asset_name' => $asset_name])->update(array('amount'=>$new_generated_amount, 'unit'=>$new_unit, 'reissuable'=>$reissuable, 'ipfs'=>$new_ipfs));
+                    $temp = intval($new_amount) + intval($current_amount);
+                    DB::table('asset_list')->where(['admin' => $seed, 'asset_name' => $asset_name])->update(array('amount'=>$temp, 'unit'=>$new_unit, 'reissuable'=>$reissuable, 'ipfs'=>$new_ipfs));
 
                     $sql_query = 'select * from all_asset_transactions where owner="'.$seed.'" and asset_name="'.$asset_name.'"';
                     $users = DB::select($sql_query);
 
                     if(count($users) > 0){
+                        $current_amount = $users[0]->amount;
                         $temp = intval($current_amount) + intval($new_amount);
                         DB::table('all_asset_transactions')->where(['asset_name' => $asset_name, 'owner'=>$seed])->update(array('amount'=>$temp));
                     }

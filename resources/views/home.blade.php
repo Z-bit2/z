@@ -2,17 +2,16 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <title>Mango Farm  | Welcome</title>
+    <title>Frexa | Welcome</title>
     <meta charset="utf=-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="">
     <meta keywords= "keywords">
-    <meta property="title" content="Mango Farm - Blockchain Assets Made Easy">
-    <meta property="description" content="Mango Farm makes creating and storing blockchain assets easy. Powered by Ravencoin.">
-    <meta property="og:image" content="{{ url('/images/mangobird.png') }}" >
-    <link rel="shortcut icon" href="{{ url('/images/mangobird.png') }}">
-    <!-- <link rel="stylesheet" href="/assets/css/mango.min.css">      -->
-    <link rel="stylesheet" href="{{ url('css/mango.min.css') }}">
+    <meta property="title" content="Frexa">
+    <meta property="description" content="Frexa">
+    <!-- <meta property="og:image" content="{{ url('/images/.png') }}" > -->
+    <!-- <link rel="shortcut icon" href="{{ url('/images/.png') }}"> -->
+    <link rel="stylesheet" href="{{ url('css/frexa.min.css') }}">
 
     <script type="text/javascript" src="{{ url('/js/ajax.js') }}"></script>
     <script type="text/javascript" src="{{ url('js/html.min.js') }}"></script>
@@ -26,8 +25,8 @@
         <div id="header_title" class='absolute v_center'>
           <div id="logo_link" class="absolute v_center"></div>
           <span id="logo_title">
-            <span class="title title_primary">Mango</span>
-            <span class="title title_secondary">Farm</span>
+            <span class="title title_primary">Frexa</span>
+            <!-- <span class="title title_secondary">Farm</span> -->
           </span>
         </div>
       </a>
@@ -43,9 +42,9 @@
         </div>
       </div>
         <div id="nav_links" class="absolute v_center right">
-          <a class="neon nav_link" id="mangowallet_nav" href="/mangowallet"><span class="link_mobile_hide">Frexa </span>Wallet</a>
-          <a class="neon nav_link" id="assetbuilder_nav" href="/assetbuilder"><span class="link_mobile_hide">Upload </span>Property</a>
-          <a class="neon nav_link" id="assetviewer_nav" href="/assetviewer"><span class="link_mobile_hide">View </span>Property</a>
+          <a class="neon nav_link" id="mangowallet_nav" href="/frexawallet"><span class="link_mobile_hide">Frexa </span>Wallet</a>
+          <a class="neon nav_link" id="assetbuilder_nav" href="/propertybuilder"><span class="link_mobile_hide">Upload </span>Property</a>
+          <a class="neon nav_link" id="assetviewer_nav" href="/propertyviewer"><span class="link_mobile_hide">View </span>Property</a>
         </div>
       </div>
     </div>
@@ -54,16 +53,16 @@
 
   <link rel="stylesheet" href="{{ url('css/welcome.css')}}">
 <div style="position:relative;">
-  <div class="mango_img"></div>
+  <!-- <div class="_img"></div> -->
     <div class="subheader">Blockchain Assets ... Made Easy</div>
     <picture>
       <img class="banner_img" src="{{ url('/images/bg7a.jpg') }}" alt="" style="opacity: 0.7;">
       <img class="med_banner" src="{{ url('/images/bg7b.jpg') }}" alt="" style="opacity: 0.7;">
       <img class="sm_banner" src="{{ url('/images/bg7c.jpg') }}" alt="" style="opacity: 0.7;">
       <div style="position:absolute; top:18px; right:1.5%; font-size:1.75em;">
-          <a class="neon nav_link" id="mangowallet_nav" href="/mangowallet" style="margin-right:20px;"><span class="welcome_mobile_hide">Frexa </span>Wallet</a>
-          <a class="neon" id="assetbuilder_nav" href="/assetbuilder" style="margin-right:25px;"><span class="welcome_mobile_hide">Upload </span>Property</a>
-          <a class="neon" id="assetviewer_nav" href="/assetviewer"><span class="welcome_mobile_hide">View </span>Property</a>
+          <a class="neon nav_link" id="mangowallet_nav" href="/frexawallet" style="margin-right:20px;"><span class="welcome_mobile_hide">Frexa </span>Wallet</a>
+          <a class="neon" id="assetbuilder_nav" href="/propertybuilder" style="margin-right:25px;"><span class="welcome_mobile_hide">Upload </span>Property</a>
+          <a class="neon" id="assetviewer_nav" href="/propertytviewer"><span class="welcome_mobile_hide">View </span>Property</a>
       </div>
         <svg width="100%" height="1280">
           <defs>
@@ -74,13 +73,13 @@
             <mask id="mask">
               <rect width="100%" height="100%" fill="#fff" />
               <text class="hero" x="20%" y="50%">
-                <tspan letter-spacing="8">MANGO FARM</tspan>
+                <tspan letter-spacing="8">F r e x a</tspan>
 
               </text>
             </mask>
           </defs>
           <text class="hero" x="20%" y="50%">
-            <tspan opacity="0.3" letter-spacing="8" fill="#000">MANGO FARM</tspan>
+            <tspan opacity="0.3" letter-spacing="8" fill="#000">F R E X A</tspan>
           </text>
           <rect width="100%" height="100%" fill="url(#gradient)" fill-opacity="0.8" mask="url(#mask)" />
         </svg>
@@ -99,13 +98,13 @@
         <a href="/assetbuilder"><div class="tab-btn">
           <div id="build_icon"></div>
           <div class="tab-btn-text">
-            Use our Asset Builder to create your asset, as well as create and sign your own custom contract.
+            Use our Property Builder to create your property, as well as create and sign your own custom contract.
           </div>
         </div></a>
-        <a href="/assetviewer"><div class="tab-btn">
+        <a href="/propertyviewer"><div class="tab-btn">
           <div id="view_icon"></div>
           <div class="tab-btn-text">
-            Use our Asset Viewer to reference any asset which has been issued on the blockchain.
+            Use our Property Viewer to reference any asset which has been issued on the blockchain.
           </div>
         </div></a>
       </div>
@@ -115,7 +114,7 @@
       <input class="tab-open" id="tab-2" name="tab-wrap-1" type="radio">
       <label class="tab-nav" for="tab-2">Secure</label>
       <div class="tab-inner">
-        <p>Mango Farm is powered by the Ravencoin Network, the leading network for secure blockchain asset tokenization.</p>
+        <p>Frexa is powered by the Ravencoin Network, the leading network for secure blockchain asset tokenization.</p>
         <div style="margin-left:-75px; margin-top:15px;"><a href="https://ravencoin.org/" target="_blank">
           <img src="{{ url('/images/blockchain.png') }}">
         </a></div>
@@ -126,7 +125,7 @@
       <input class="tab-open" id="tab-3" name="tab-wrap-1" type="radio" >
       <label class="tab-nav" for="tab-3">Compliant</label>
       <div class="tab-inner">
-        <p>Link your blockchain asset with a custom legal document using Mango Farm's free online tools.</p>
+        <p>Link your blockchain asset with a custom legal document using Frexa's free online tools.</p>
         <div style="margin:auto; width:60%; margin-top:55px;">
           <div style="width:250px; display: inline-block;">
             <img src="{{ url('/images/document.png') }}"><br>

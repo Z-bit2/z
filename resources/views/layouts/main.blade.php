@@ -8,14 +8,16 @@
     <meta name="description" content="">
     <meta keywords= "keywords">
 
-    <meta property="og:title" content="Mango Farm - Blockchain Assets Made Easy">
-    <meta property="og:description" content="Mango Farm makes creating and storing blockchain assets easy. Powered by Ravencoin.">
-    <meta property="og:image" content="{{ url('/images/mangobird.png') }}" >
+    <meta property="og:title" content="Frexa">
+    <meta property="og:description" content="Frexa">
+    <!-- <meta property="og:image" content="{{ url('/images/x.png') }}" > -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" href="{{ url('/images/mangobird.png') }}">
+    <!-- <link rel="shortcut icon" href="{{ url('/images/x.png') }}"> -->
     <link rel="stylesheet" href="{{ url('css/mango.min.css') }}">
 
     <script type="text/javascript" src="{{ url('/js/ajax.js') }}"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <style>
   .termlist li{

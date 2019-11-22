@@ -11,18 +11,18 @@ Route::get('/terms', function (){
 	return view('terms');
 });
 
-Route::get('/mangowallet', function (){
-	return view('mangowallet');
+Route::get('/frexawallet', function (){
+	return view('frexawallet');
 });
 
-Route::get('/assetbuilder', function(Request $request){
+Route::get('/uploadproperty', function(Request $request){
 	if($request->session()->has('seed')){
 		return view('assetbuilder');
 	}
-	return redirect('mangowallet');
+	return redirect('frexawallet');
 });
 
-Route::get('/assetviewer', function(){
+Route::get('/propertyviewer', function(){
 	return view('assetviewer');
 });
 
@@ -60,3 +60,5 @@ Route::post('test', function () {
     event(new App\Events\StatusWalletChanged("aa", 100));
     return "Event has been sent!";
 });
+
+Route::post('/ajax_upload/action', 'AjaxUploadController@action')->name('image_upload.action');
