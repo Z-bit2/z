@@ -284,7 +284,6 @@
 			'//www.tiny.cloud/css/codepen.min.css'
 		],
 		init_instance_callback : function(editor) {
-			console.log("Hi");
 		}
 	});
 </script>

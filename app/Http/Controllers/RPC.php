@@ -440,7 +440,7 @@ class RPC extends Controller
 
                 if(count($users) > 0){
                     $myaddress = $users[0]->wallet_address;
-                    if(floatval($wallet_amount) < floatval(125)){
+                    if(floatval($wallet_amount) < floatval(500)){
                         // return response()->json($decoded_result, 200);
                         return "Charge Error";
                     }
@@ -449,18 +449,18 @@ class RPC extends Controller
                     return "DB error";
                 }
 
-                // $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "move", "params" => [$seed, "", 100] );
-                // $curl = curl_init();
-                // curl_setopt($curl, CURLOPT_POST, 1);
-                // curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-                // curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-                // curl_setopt($curl, CURLOPT_USERPWD, "trey" . ":" . "trey2019raven");
-                // curl_setopt($curl, CURLOPT_URL, 'http://34.217.223.244:8766/');
-                // curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                // curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($request_data));
-                // $result = curl_exec($curl);
-                // $info = curl_getinfo($curl);
-                // curl_close($curl);
+                $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "move", "params" => [$seed, "",500] );
+                $curl = curl_init();
+                curl_setopt($curl, CURLOPT_POST, 1);
+                curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+                curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+                curl_setopt($curl, CURLOPT_USERPWD, "trey" . ":" . "trey2019raven");
+                curl_setopt($curl, CURLOPT_URL, 'http://34.217.223.244:8766/');
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($request_data));
+                $result = curl_exec($curl);
+                $info = curl_getinfo($curl);
+                curl_close($curl);
 
                 if($reissuable){
                     $reissuable = true;

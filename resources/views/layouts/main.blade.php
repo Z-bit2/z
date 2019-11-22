@@ -13,7 +13,7 @@
     <!-- <meta property="og:image" content="{{ url('/images/x.png') }}" > -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- <link rel="shortcut icon" href="{{ url('/images/x.png') }}"> -->
-    <link rel="stylesheet" href="{{ url('css/mango.min.css') }}">
+    <link rel="stylesheet" href="{{ url('css/frexa.min.css') }}">
 
     <script type="text/javascript" src="{{ url('/js/ajax.js') }}"></script>
 
