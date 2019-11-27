@@ -147,7 +147,7 @@
 		            	<!-- Your wallet is {{ Session::get('seed') }} -->
 		                <a id="getAddress" onclick="get_newAddress();">Get New Address</a>
 		                <a id="sendRvn" onclick="send_raven();">Send Ravencoin</a>
-		                <a id="buildAsset" class="asset_action" href="/assetbuilder">Create New Asset</a>
+		                <a id="buildAsset" class="asset_action" href="/propertybuilder">Create New Asset</a>
 		                <a id="sendAsset" class="asset_action" onclick="show_send_asset_modal();">Send Asset</a>
 		                <!-- <a id="burnAsset" class="asset_action" onclick="">Burn Asset</a> -->
 		                <!-- <a id="pairGoogle" onclick="">Activate 2FA</a> -->

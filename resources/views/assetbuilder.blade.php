@@ -5,7 +5,11 @@
 @section('content')
 
 <script type="text/javascript" src="{{ url('js/jquery.min.js') }}"></script>
-
+<style type="text/css">
+	.tox-notifications-container{
+		display: none;
+	}
+</style>
 <div id="body_container">
 	<div style="color:#fff;">
 	</div>
@@ -671,7 +675,7 @@
 								window.location.reload(true);
 							}
 							else{
-								alert(res);
+								alert("Oops! Something went Wrong!");
 							}
 						}
 					});

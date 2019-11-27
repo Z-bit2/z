@@ -15,7 +15,7 @@ Route::get('/frexawallet', function (){
 	return view('frexawallet');
 });
 
-Route::get('/uploadproperty', function(Request $request){
+Route::get('/propertybuilder', function(Request $request){
 	if($request->session()->has('seed')){
 		return view('assetbuilder');
 	}

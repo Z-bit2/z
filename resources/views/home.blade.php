@@ -62,7 +62,7 @@
       <div style="position:absolute; top:18px; right:1.5%; font-size:1.75em;">
           <a class="neon nav_link" id="mangowallet_nav" href="/frexawallet" style="margin-right:20px;"><span class="welcome_mobile_hide">Frexa </span>Wallet</a>
           <a class="neon" id="assetbuilder_nav" href="/propertybuilder" style="margin-right:25px;"><span class="welcome_mobile_hide">Upload </span>Property</a>
-          <a class="neon" id="assetviewer_nav" href="/propertytviewer"><span class="welcome_mobile_hide">View </span>Property</a>
+          <a class="neon" id="assetviewer_nav" href="/propertyviewer"><span class="welcome_mobile_hide">View </span>Property</a>
       </div>
         <svg width="100%" height="1280">
           <defs>
@@ -95,7 +95,7 @@
       <label class="tab-nav" for="tab-1">Simple</label>
       <div class="tab-inner">
         <p>All the tools needed to create, store and maintain assets on the blockchain are available here in one simple interface.</p>
-        <a href="/assetbuilder"><div class="tab-btn">
+        <a href="/propertybuilder"><div class="tab-btn">
           <div id="build_icon"></div>
           <div class="tab-btn-text">
             Use our Property Builder to create your property, as well as create and sign your own custom contract.
