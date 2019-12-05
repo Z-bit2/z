@@ -250,50 +250,51 @@
             }
             else{
               var temp = "";
-              if(res[1]["avatar_url"] == "" || res[1]["avatar_url"] == null){
+              console.log(res[1]["full_asset_name"]);
+              if(res[1]["avatar_url"] == "" && res[1]["avatar_url"] == null){
                 $("#avater").css("display", "none");
               }
               else{
                 $("#avater").css("display", "block");
                 $("#avater").attr("src", "/upload_img/" + res[1]["avatar_url"]);
               }
-              if(res[1]["full_asset_name"] != "" || res[1]["full_asset_name"] != null){
+              if(res[1]["full_asset_name"] != "" && res[1]["full_asset_name"] != null){
                 temp += '<div style="margin:15px;">Full Asset Name:<span class="opacity" style="color:#2196F3;font-weight:300;">' + res[1]["full_asset_name"] + '</span></div>';
               }
-              if(res[1]["description"] != "" || res[1]["description"] != null){
+              if(res[1]["description"] != "" && res[1]["description"] != null){
                 temp += '<div style="margin:15px;">Description:<span class="opacity" style="color:#2196F3;font-weight:300;">' + res[1]["description"] + '</span></div>';
               }
-              if(res[1]["issuer"] != "" || res[1]["issuer"] != null){
+              if(res[1]["issuer"] != "" && res[1]["issuer"] != null){
                 temp += '<div style="margin:15px;">Issuer:<span class="opacity" style="color:#2196F3;font-weight:300;">' + res[1]["issuer"] + '</span></div>';
               }
-              if(res[1]["website_url"] != "" || res[1]["website_url"] != null){
+              if(res[1]["website_url"] != "" && res[1]["website_url"] != null){
                 temp += '<div style="margin:15px;">Website Url:<span class="opacity" style="color:#2196F3;font-weight:300;">' + res[1]["website_url"] + '</span></div>';
               }
-              if(res[1]["image_url"] != "" || res[1]["image_url"] != null){
+              if(res[1]["image_url"] != "" && res[1]["image_url"] != null){
                 temp += '<div style="margin:15px;">Image Url:<span class="opacity" style="color:#2196F3;font-weight:300;">' + res[1]["image_url"] + '</span></div>';
               }
-              if(res[1]["contact_address"] != "" || res[1]["contact_address"] != null){
+              if(res[1]["contact_address"] != "" && res[1]["contact_address"] != null){
                 temp += '<div style="margin:15px;">Contact Address:<span class="opacity" style="color:#2196F3;font-weight:300;">' + res[1]["contact_address"] + '</span></div>';
               }
-              if(res[1]["contact_email"] != "" || res[1]["contact_email"] != null){
+              if(res[1]["contact_email"] != "" && res[1]["contact_email"] != null){
                 temp += '<div style="margin:15px;">Contact Email:<span class="opacity" style="color:#2196F3;font-weight:300;">' + res[1]["contact_email"] + '</span></div>';
               }
-              if(res[1]["contact_name"] != "" || res[1]["contact_name"] != null){
+              if(res[1]["contact_name"] != "" && res[1]["contact_name"] != null){
                 temp += '<div style="margin:15px;">Contact Name:<span class="opacity" style="color:#2196F3;font-weight:300;">' + res[1]["contact_name"] + '</span></div>';
               }
-              if(res[1]["contact_phone"] != "" || res[1]["contact_phone"] != null){
+              if(res[1]["contact_phone"] != "" && res[1]["contact_phone"] != null){
                 temp += '<div style="margin:15px;">Contact Phone:<span class="opacity" style="color:#2196F3;font-weight:300;">' + res[1]["contact_phone"] + '</span></div>';
               }
-              if(res[1]["contact_url"] != "" || res[1]["contact_url"] != null){
+              if(res[1]["contact_url"] != "" && res[1]["contact_url"] != null){
                 temp += '<div style="margin:15px;">Contact Url:<span class="opacity" style="color:#2196F3;font-weight:300;">' + res[1]["contact_url"] + '</span></div>';
               }
-              if(res[1]["restricted"] != "" || res[1]["restricted"] != null){
+              if(res[1]["restricted"] != "" && res[1]["restricted"] != null){
                 temp += '<div style="margin:15px;">Restricted:<span class="opacity" style="color:#2196F3;font-weight:300;">' + res[1]["restricted"] + '</span></div>';
               }
-              if(res[1]["sale_price"] != "" || res[1]["sale_price"] != null){
+              if(res[1]["sale_price"] != "" && res[1]["sale_price"] != null){
                 temp += '<div style="margin:15px;">Sale Price:<span class="opacity" style="color:#2196F3;font-weight:300;">' + res[1]["sale_price"] + '</span></div>';
               }
-              if(res[1]["type"] != "" || res[1]["type"] != null){
+              if(res[1]["type"] != "" && res[1]["type"] != null){
                 temp += '<div style="margin:15px;">Type:<span class="opacity" style="color:#2196F3;font-weight:300;">' + res[1]["type"] + '</span></div>';
               }
 

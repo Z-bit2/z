@@ -49,7 +49,7 @@
     }
 
     #mango_background {
-        background-image: url("/images/mango_big.png");
+        /*background-image: url("/images/mango_big.png");*/
         height: 300px;
         width: 500px;
         background-repeat: no-repeat;
