@@ -653,7 +653,7 @@
 						},
 						success:function(res, status){
 							if(res == "success"){
-								window.location.reload(true);
+								window.location.href = '/frexawallet';
 							}
 							else{
 								alert("Oops! Something went Wrong!");

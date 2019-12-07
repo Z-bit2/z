@@ -10,12 +10,7 @@ use DB;
 
 class PIpfs extends Controller
 {
-    public function index()
-    {
-
-    }
-
-    public function get_ipfs(Request $request){
+   public function get_ipfs(Request $request){
         $ipfs = new IPFS();
         $file = $request->input('file');
         $hash = $ipfs->add($file);
