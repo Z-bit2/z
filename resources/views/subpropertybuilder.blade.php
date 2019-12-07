@@ -506,12 +506,6 @@
 	}
 
 	$(document).ready(function(){
-		var freeTiny = document.querySelector('.tox .tox-notification--in');
-  		freeTiny.style.display = 'none';
-
-  		$('.tox').click(function(){
-  			console.log("Hey");
-  		})
 
 		$("#cbx2").on("change", function(e){
 			if($(this).prop("checked")){
@@ -522,20 +516,6 @@
 			$("#forsale_price").prop("disabled", true);
 			$("#sale_disp").css("opacity", 0.5);
 			return;
-		});
-
-		$.ajax({
-			headers:{
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			},
-			type : 'POST',
-			url : '/get_all_assets',
-			data : {
-				_token : "<?php echo csrf_token() ?>"
-			},
-			success:function(res, status){
-				assets = res;
-			}
 		});
 
 		window.onclick = function(event) {
@@ -666,7 +646,7 @@
 							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 						},
 						type : 'POST',
-						url : '/asset_creation',
+						url : '/sub_asset_creation',
 						data : {
 							_token : "<?php  ?>",
 							data : ajax_data
@@ -691,27 +671,6 @@
 	document.getElementById("asset_name").addEventListener("keypress", forceKeyPressUppercase, false);
 	document.getElementById("asset_name").addEventListener("keyup", detect, false);
 	function detect(e){
-		temp = $("#asset_name").val();
-		if(temp.length >= 2){
-			for(var i = 0; i < assets.length;i ++){
-				if (assets[i] == temp) {
-					$("#name_indicator").css("display", "block");
-					$("#available_indicator").css("display", "none");
-					return;
-				}
-			}
-			$("#name_indicator").css("display", "none");
-			$("#available_indicator").css("display", "block");
-			return;
-		}
-		else if(temp.length == 1){
-			$("#name_indicator").css("display", "block");
-			$("#available_indicator").css("display", "none");
-		}
-		else{
-			$("#name_indicator").css("display", "none");
-			$("#available_indicator").css("display", "none");
-		}
 	}
 	function forceKeyPressUppercase(e)
 	{
@@ -725,33 +684,6 @@
 				e.target.setSelectionRange(start+1, start+1);
 				e.preventDefault();
 			}
-		}
-		else if(((charInput >= 65) && (charInput <= 90)) || charInput == 95 || ((charInput >= 48) && (charInput <= 57))){
-		}
-		else{
-			e.preventDefault();
-		}
-
-		temp = $("#asset_name").val();
-		if(temp.length >= 2){
-			for(var i = 0; i < assets.length;i ++){
-				if (assets[i] == temp) {
-					$("#name_indicator").css("display", "block");
-					$("#available_indicator").css("display", "none");
-					return;
-				}
-			}
-			$("#name_indicator").css("display", "none");
-			$("#available_indicator").css("display", "block");
-			return;
-		}
-		else if(temp.length == 1){
-			$("#name_indicator").css("display", "block");
-			$("#available_indicator").css("display", "none");
-		}
-		else{
-			$("#name_indicator").css("display", "none");
-			$("#available_indicator").css("display", "none");
 		}
 	}
 

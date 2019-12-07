@@ -973,12 +973,17 @@
                             temp += '<div class="asset_qty">';
                             temp += '<span class="dropbtn" onclick="myFunction('+i+')"><i class="fa fa-cog" style="font-size:40px;"></i></span>';
                             temp += '<div id="myDropdown'+i+'" class="dropdown-content"><a href="#" class="transfer_admin">Transfer Admin</a>';
+
                             if(result[i].reissuable == 1){
                                 temp += '<a href="#" class="reissue_asset">Reissue</a>';
                             }
+
+                            temp += '<a href="#" class="issue_sub">Issue Sub Asset</a>';
+
                             temp += '</div></div>';
                             temp += '</div>';
                         }
+
                         $('#admin_list').html(temp);
 
                         $(".transfer_admin").on('click', function(e){
@@ -989,6 +994,26 @@
                             $("#transfer_admin_modal").css("display", "block");
                             $("#transfer_admin_modal").css("opacity", "1");
                             document.getElementById($(this).parent().attr("id")).classList.toggle("show");
+                        });
+
+                        $(".issue_sub").on('click', function(e){
+                            document.getElementById($(this).parent().attr("id")).classList.toggle("show");
+                            admin_token = $(this).parent().parent().parent().children('.asset_name').html();
+                            $.ajax({
+                                headers:{
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                },
+                                type : 'POST',
+                                url : '/set_admin_token',
+                                data : {
+                                    _token : "<?php echo csrf_token() ?>",
+                                    admin_token : admin_token
+
+                                },
+                                success:function(res, status){
+                                    window.location.href = "/subpropertybuilder";
+                                }
+                            });
                         });
 
                         $(".reissue_asset").on('click', function(e){

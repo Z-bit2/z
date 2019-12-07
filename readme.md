@@ -20,7 +20,7 @@ Follow this <a alt="link removed" href="https://devanswers.co/install-composer-p
 
 - Ubuntu
 
-<a alt="link removed" href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-composer-on-ubuntu-18-04">link</href>
+<a alt="link removed" href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-composer-on-ubuntu-18-04">link</a>
 
 > Database Configuration
 > Install and Run IPFS daemon

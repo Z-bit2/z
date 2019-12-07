@@ -22,6 +22,18 @@ Route::get('/propertybuilder', function(Request $request){
 	return redirect('frexawallet');
 });
 
+Route::get('/subpropertybuilder', function(Request $request){
+	if($request->session()->has('seed')){
+		return view('subpropertybuilder');
+	}
+	return redirect('frexawallet');
+});
+
+Route::post('/set_admin_token', function(Request $request){
+	$request->session()->put('admin_token', $request->input('admin_token'));
+	return $request->session()->get('admin_token');
+});
+
 Route::get('/propertyviewer', function(){
 	return view('assetviewer');
 });
@@ -44,7 +56,9 @@ Route::post('/get_my_assets', 'RPC@get_my_assets');
 
 Route::post('/get_my_admin_assets', 'RPC@get_my_admin_assets');
 
-Route::post('/try_create_asset', 'RPC@try_create_asset');
+Route::post('/asset_creation', 'RPC@asset_creation');
+
+Route::post('/sub_asset_creation', 'RPC@sub_asset_creation');
 
 Route::post('/try_send_asset', 'RPC@try_send_asset');
 

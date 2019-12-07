@@ -55,8 +55,23 @@ class RPC extends Controller
         }
     }
 
-    public function try_create_asset(Request $request){
+    public function asset_creation_test(Request $request){
+        $create_type = $request->session->get('asset_create_type');
 
+        if($create_type == 1){
+            try_create_asset();
+            return;
+        }
+
+        if($create_typ == 2){
+            try_create_sub_asset();
+            return;
+        }
+
+        return "something went wrong";
+    }
+
+    public function asset_creation(Request $request){
         $data = $request->input('data');
         $seed = $request->session()->get('seed');
         $myaddress = "";
@@ -148,6 +163,96 @@ class RPC extends Controller
         return $decoded_result["error"];
     }
 
+    public function sub_asset_creation(Request $request){
+        $data = $request->input('data');
+        $seed = $request->session()->get('seed');
+        $myaddress = "";
+
+        $ipfs = $data['ipfs'];
+        $asset_symbol = $request->session()->get('admin_token').'/'.$data['asset_symbol'];
+        $asset_unit = intval($data['asset_sub_units']);
+        $asset_quantity = intval($data['asset_qty']);
+        $reissuable = $data['reissuable'];
+
+
+
+        $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "getbalance", "params" => [$seed] );
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+        curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        curl_setopt($curl, CURLOPT_USERPWD, "trey" . ":" . "trey2019raven");
+        curl_setopt($curl, CURLOPT_URL, 'http://34.217.223.244:8766/');
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($request_data));
+        $result = curl_exec($curl);
+        $info = curl_getinfo($curl);
+        curl_close($curl);
+        $decoded_result=json_decode($result, true);
+
+        $current_amount = $decoded_result["result"];
+
+        $sql_query = 'select * from site_users where seed="'.$seed.'"';
+        $users = DB::select($sql_query);
+
+        if(floatval($current_amount) < floatval(525)){
+            return "Charge Error";
+        }
+
+        if(count($users) > 0){
+            $myaddress = $users[0]->wallet_address;
+
+        }
+        else{
+            return "DB error";
+        }
+
+        if($reissuable)
+            $reissuable = true;
+        else
+            $reissuable = false;
+
+        if($ipfs != ""){
+            $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "issue", "params" => [$asset_symbol, $asset_quantity, $myaddress, $myaddress, $asset_unit, $reissuable, true, $ipfs] );
+        }
+        else{
+            $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "issue", "params" => [$asset_symbol, $asset_quantity, $myaddress, $myaddress, $asset_unit, $reissuable] );
+        }
+
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+        curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        curl_setopt($curl, CURLOPT_USERPWD, "trey" . ":" . "trey2019raven");
+        curl_setopt($curl, CURLOPT_URL, 'http://34.217.223.244:8766/');
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($request_data));
+        $result = curl_exec($curl);
+        $info = curl_getinfo($curl);
+        curl_close($curl);
+        $decoded_result=json_decode($result, true);
+        if($decoded_result["error"] == null){
+            $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "move", "params" => [$seed, "", 525] );
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_POST, 1);
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+            curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+            curl_setopt($curl, CURLOPT_USERPWD, "trey" . ":" . "trey2019raven");
+            curl_setopt($curl, CURLOPT_URL, 'http://34.217.223.244:8766/');
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($request_data));
+            $result = curl_exec($curl);
+            $info = curl_getinfo($curl);
+            curl_close($curl);
+
+            DB::insert('insert into all_asset_transactions (asset_name, amount, admin_token_role, owner) values(?, ?, ?, ?)', [$asset_symbol, $asset_quantity, 2, $seed]);
+
+            DB::insert('insert into asset_list (asset_name, amount, unit, avatar_url, full_asset_name, description, issuer, website_url, image_url, contact_name, contact_address, contact_email, contact_phone, type, restricted, reissuable, ipfs, contact_url, sale_price, admin, contract_content, contract_type) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [$data['asset_symbol'], $data['asset_qty'], $data['asset_sub_units'], $data['avatar_url'], $data['full_asset_name'], $data['description'], $data['issuer'], $data['website_url'], $data['image_url'], $data['contact_name'], $data['contact_address'], $data['contact_email'], $data['contact_phone'], $data['type'], $data['restricted'], $data['reissuable'], $data['ipfs'], '', $data['sale_price'], $seed, $data['contract_content'], intval($data['contract_type'])]);
+
+            return "success";
+        }
+        return $decoded_result["error"];
+    }
 
     public function try_send_asset(Request $request){
         $seed = $request->session()->get('seed');
