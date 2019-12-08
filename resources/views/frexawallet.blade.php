@@ -128,6 +128,7 @@
 			<input type="button" class="btn-6 toolbar_btn btn-alt" value="Login" onclick="show_login_modal()"><br>
 			<input type="button" class="btn-6 toolbar_btn btn-alt" value="Create New Wallet" onclick="show_modal()"><br>
 			<input type="button" class="btn-6 toolbar_btn btn-alt" value="Use Existing Seed" onclick="exiting_seed();"><br>
+            <input type="button" class="btn-6 toolbar_btn btn-alt" value="Buy or Sell Properties"><br>
 			<!-- <input type="butt
 				on" class="btn-6 toolbar_btn btn-alt" value="Trezor Mode" onclick=""><br> -->
 		</div>
