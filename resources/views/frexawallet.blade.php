@@ -129,8 +129,6 @@
 			<input type="button" class="btn-6 toolbar_btn btn-alt" value="Create New Wallet" onclick="show_modal()"><br>
 			<input type="button" class="btn-6 toolbar_btn btn-alt" value="Use Existing Seed" onclick="exiting_seed();"><br>
             <input type="button" class="btn-6 toolbar_btn btn-alt" value="Buy or Sell Properties"><br>
-			<!-- <input type="butt
-				on" class="btn-6 toolbar_btn btn-alt" value="Trezor Mode" onclick=""><br> -->
 		</div>
 
 		<div id="trez_login">
@@ -150,8 +148,6 @@
 		                <a id="sendRvn" onclick="send_raven();">Send Ravencoin</a>
 		                <a id="buildAsset" class="asset_action" href="/propertybuilder">Create New Asset</a>
 		                <a id="sendAsset" class="asset_action" onclick="show_send_asset_modal();">Send Asset</a>
-		                <!-- <a id="burnAsset" class="asset_action" onclick="">Burn Asset</a> -->
-		                <!-- <a id="pairGoogle" onclick="">Activate 2FA</a> -->
 		                <a id="logout" onclick="logout()">Sign Out</a>
 		            </div>
 		            <a id="reload_btn" class="wallet_btn header_btn" title="Reload Wallet" onclick="window.location.reload(true);"></a>

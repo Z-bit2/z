@@ -239,7 +239,7 @@
               $("#ipfs_data").html(res[0]["ipfs_hash"]);
             }
             else{
-              $("#ipfs_data").html("No IPFS Data");
+              $("#ipfs_data").html("This propoerty has no IPFS Data");
             }
 
             if(res[1] == "NO"){
