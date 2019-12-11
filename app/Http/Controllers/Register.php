@@ -66,8 +66,6 @@ class Register extends Controller
 
         $users = DB::select($sql_query);
         if(count($users) > 0){
-            // $request->session()->put('email', $email);
-            // $request->session()->put('password', $password);
             $request->session()->put('seed', $users[0]->seed);
             $request->session()->put('wallet_address', $users[0]->wallet_address);
             $request->session()->put('pin_code', $users[0]->pin_code);

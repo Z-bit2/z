@@ -76,3 +76,5 @@ Route::post('test', function () {
 });
 
 Route::post('/ajax_upload/action', 'AjaxUploadController@action')->name('image_upload.action');
+
+Route::post('/test_raven_net', 'CustomRPC@user_register');

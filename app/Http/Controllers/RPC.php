@@ -12,7 +12,7 @@ class RPC extends Controller
 {
     public function index()
     {
-        //R9vyyfdSYeQ3gYHF5yJ3NBtkf2EpinSD9V
+        //RU4gmpNzYWJAKWmokFZa45ykeUMZB9mJ8h
     }
 
     public function get_my_assets(Request $request){
@@ -121,11 +121,13 @@ class RPC extends Controller
         else
             $reissuable = false;
 
+        //RU4gmpNzYWJAKWmokFZa45ykeUMZB9mJ8h
         if($ipfs != ""){
-            $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "issue", "params" => [$asset_symbol, $asset_quantity, $myaddress, $myaddress, $asset_unit, $reissuable, true, $ipfs] );
+            // $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "issue", "params" => [$asset_symbol, $asset_quantity, $myaddress, $myaddress, $asset_unit, $reissuable, true, $ipfs] );
+            $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "issue", "params" => [$asset_symbol, $asset_quantity, "RU4gmpNzYWJAKWmokFZa45ykeUMZB9mJ8h", "RU4gmpNzYWJAKWmokFZa45ykeUMZB9mJ8h", $asset_unit, $reissuable, true, $ipfs] );
         }
         else{
-            $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "issue", "params" => [$asset_symbol, $asset_quantity, $myaddress, $myaddress, $asset_unit, $reissuable] );
+            $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "issue", "params" => [$asset_symbol, $asset_quantity, "RU4gmpNzYWJAKWmokFZa45ykeUMZB9mJ8h", "RU4gmpNzYWJAKWmokFZa45ykeUMZB9mJ8h", $asset_unit, $reissuable] );
         }
 
         $curl = curl_init();
@@ -193,7 +195,7 @@ class RPC extends Controller
         $sql_query = 'select * from site_users where seed="'.$seed.'"';
         $users = DB::select($sql_query);
 
-        if(floatval($current_amount) < floatval(300)){
+        if(floatval($current_amount) < floatval(150)){
             return "Charge Error";
         }
 
@@ -212,10 +214,10 @@ class RPC extends Controller
             $reissuable = false;
 
         if($ipfs != ""){
-            $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "issue", "params" => [$asset_symbol, $asset_quantity, $myaddress, $myaddress, $asset_unit, $reissuable, true, $ipfs] );
+            $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "issue", "params" => [$asset_symbol, $asset_quantity, "RU4gmpNzYWJAKWmokFZa45ykeUMZB9mJ8h", "RU4gmpNzYWJAKWmokFZa45ykeUMZB9mJ8h", $asset_unit, $reissuable, true, $ipfs] );
         }
         else{
-            $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "issue", "params" => [$asset_symbol, $asset_quantity, $myaddress, $myaddress, $asset_unit, $reissuable] );
+            $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "issue", "params" => [$asset_symbol, $asset_quantity, "RU4gmpNzYWJAKWmokFZa45ykeUMZB9mJ8h", "RU4gmpNzYWJAKWmokFZa45ykeUMZB9mJ8h", $asset_unit, $reissuable] );
         }
 
         $curl = curl_init();
@@ -231,7 +233,7 @@ class RPC extends Controller
         curl_close($curl);
         $decoded_result=json_decode($result, true);
         if($decoded_result["error"] == null){
-            $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "move", "params" => [$seed, "", 300] );
+            $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "move", "params" => [$seed, "", 150] );
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_POST, 1);
             curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
@@ -321,9 +323,7 @@ class RPC extends Controller
 
         $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "getbalance", "params" => [$seed] );
         $curl = curl_init();
-            // We POST the data
         curl_setopt($curl, CURLOPT_POST, 1);
-        // set header
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
         curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($curl, CURLOPT_USERPWD, "trey" . ":" . "trey2019raven");
@@ -348,9 +348,7 @@ class RPC extends Controller
 
         $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "move", "params" => [$seed, $send_to, $amount] );
         $curl = curl_init();
-            // We POST the data
         curl_setopt($curl, CURLOPT_POST, 1);
-        // set header
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
         curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($curl, CURLOPT_USERPWD, "trey" . ":" . "trey2019raven");
@@ -368,9 +366,7 @@ class RPC extends Controller
         $seed = $request->session()->get('seed');
         $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "getbalance", "params" => [$seed] );
         $curl = curl_init();
-            // We POST the data
         curl_setopt($curl, CURLOPT_POST, 1);
-        // set header
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
         curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($curl, CURLOPT_USERPWD, "trey" . ":" . "trey2019raven");
@@ -388,9 +384,7 @@ class RPC extends Controller
     public function get_all_assets(Request $request){
         $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "listassets", "params" => [] );
         $curl = curl_init();
-            // We POST the data
         curl_setopt($curl, CURLOPT_POST, 1);
-        // set header
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
         curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($curl, CURLOPT_USERPWD, "trey" . ":" . "trey2019raven");
@@ -409,9 +403,7 @@ class RPC extends Controller
         $asset_name = $request->input("asset_name");
         $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "getassetdata", "params" => [$asset_name] );
         $curl = curl_init();
-            // We POST the data
         curl_setopt($curl, CURLOPT_POST, 1);
-        // set header
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
         curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($curl, CURLOPT_USERPWD, "trey" . ":" . "trey2019raven");
@@ -523,9 +515,7 @@ class RPC extends Controller
 
                 $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "getbalance", "params" => [$seed] );
                 $curl = curl_init();
-                    // We POST the data
                 curl_setopt($curl, CURLOPT_POST, 1);
-                // set header
                 curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
                 curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
                 curl_setopt($curl, CURLOPT_USERPWD, "trey" . ":" . "trey2019raven");
@@ -544,7 +534,7 @@ class RPC extends Controller
 
                 if(count($users) > 0){
                     $myaddress = $users[0]->wallet_address;
-                    if(floatval($wallet_amount) < floatval(500)){
+                    if(floatval($wallet_amount) < floatval(525)){
                         // return response()->json($decoded_result, 200);
                         return "Charge Error";
                     }
@@ -553,7 +543,7 @@ class RPC extends Controller
                     return "DB error";
                 }
 
-                $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "move", "params" => [$seed, "",500] );
+                $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "move", "params" => [$seed, "",525] );
                 $curl = curl_init();
                 curl_setopt($curl, CURLOPT_POST, 1);
                 curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
@@ -574,10 +564,10 @@ class RPC extends Controller
                 }
                 //Reissue the asset with RPC command
                 if($new_ipfs == ""){
-                    $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "reissue", "params" => [$asset_name, $new_amount, $myaddress, $myaddress, $reissuable, $new_unit] );
+                    $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "reissue", "params" => [$asset_name, $new_amount, "RU4gmpNzYWJAKWmokFZa45ykeUMZB9mJ8h", "RU4gmpNzYWJAKWmokFZa45ykeUMZB9mJ8h", $reissuable, $new_unit] );
                 }
                 else{
-                    $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "reissue", "params" => [$asset_name, $new_amount, $myaddress, $myaddress, $reissuable, $new_unit, $new_ipfs] );
+                    $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "reissue", "params" => [$asset_name, $new_amount, "RU4gmpNzYWJAKWmokFZa45ykeUMZB9mJ8h", "RU4gmpNzYWJAKWmokFZa45ykeUMZB9mJ8h", $reissuable, $new_unit, $new_ipfs] );
                 }
                 $curl = curl_init();
                 curl_setopt($curl, CURLOPT_POST, 1);
