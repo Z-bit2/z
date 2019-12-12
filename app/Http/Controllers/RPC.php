@@ -85,9 +85,7 @@ class RPC extends Controller
 
         $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "getbalance", "params" => [$seed] );
         $curl = curl_init();
-            // We POST the data
         curl_setopt($curl, CURLOPT_POST, 1);
-        // set header
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
         curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($curl, CURLOPT_USERPWD, "trey" . ":" . "trey2019raven");
@@ -105,7 +103,7 @@ class RPC extends Controller
         $users = DB::select($sql_query);
 
         if(floatval($current_amount) < floatval(525)){
-            return "Charge Error";
+            // return "Charge Error";
         }
 
         if(count($users) > 0){
@@ -113,7 +111,7 @@ class RPC extends Controller
 
         }
         else{
-            return "DB error";
+            // return "DB error";
         }
 
         if($reissuable)
@@ -138,11 +136,11 @@ class RPC extends Controller
         curl_setopt($curl, CURLOPT_URL, 'http://34.217.223.244:8766/');
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($request_data));
-        $result = curl_exec($curl);
-        $info = curl_getinfo($curl);
-        curl_close($curl);
-        $decoded_result=json_decode($result, true);
-        if($decoded_result["error"] == null){
+        // $result = curl_exec($curl);
+        // $info = curl_getinfo($curl);
+        // curl_close($curl);
+        // $decoded_result=json_decode($result, true);
+        // if($decoded_result["error"] == null){
             $request_data = array("jsonrpc" => "1.0", "id" => "curltest", "method" => "move", "params" => [$seed, "", 525] );
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_POST, 1);
@@ -161,8 +159,8 @@ class RPC extends Controller
             DB::insert('insert into asset_list (asset_name, amount, unit, avatar_url, full_asset_name, description, issuer, website_url, image_url, contact_name, contact_address, contact_email, contact_phone, type, restricted, reissuable, ipfs, contact_url, sale_price, admin, contract_content, contract_type) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [$data['asset_symbol'], $data['asset_qty'], $data['asset_sub_units'], $data['avatar_url'], $data['full_asset_name'], $data['description'], $data['issuer'], $data['website_url'], $data['image_url'], $data['contact_name'], $data['contact_address'], $data['contact_email'], $data['contact_phone'], $data['type'], $data['restricted'], $data['reissuable'], $data['ipfs'], '', $data['sale_price'], $seed, $data['contract_content'], intval($data['contract_type'])]);
 
             return "success";
-        }
-        return $decoded_result["error"];
+        // }
+        // return $decoded_result["error"];
     }
 
     public function sub_asset_creation(Request $request){

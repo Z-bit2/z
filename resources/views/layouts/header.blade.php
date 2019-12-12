@@ -22,7 +22,10 @@
     </div>
       <div id="nav_links" class="absolute v_center right">
         <a class="neon nav_link" id="mangowallet_nav" href="/frexawallet"><span class="link_mobile_hide">FREXA </span>Wallet</a>
+        @if(Session::has('seed'))
         <a class="neon nav_link" id="assetbuilder_nav" href="/propertybuilder"><span class="link_mobile_hide">Upload </span>Property</a>
+        @else
+        @endif
         <a class="neon nav_link" id="assetviewer_nav" href="/propertyviewer"><span class="link_mobile_hide">View </span>Property</a>
       </div>
     </div>

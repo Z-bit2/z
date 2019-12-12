@@ -10,7 +10,7 @@ class AjaxUploadController extends Controller
     function action(Request $request)
     {
       $validation = Validator::make($request->all(), [
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif,jfif|max:2048'
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif,jfif|max:5000'
       ]);
       if($validation->passes())
       {
