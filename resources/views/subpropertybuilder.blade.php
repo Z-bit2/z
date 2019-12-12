@@ -637,7 +637,7 @@
 					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 				},
 				type : 'POST',
-				url : '/asset_creation',
+				url : '/sub_asset_creation',
 				data : {
 					_token : "<?php  ?>",
 					data : ajax_data

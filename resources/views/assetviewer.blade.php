@@ -251,7 +251,7 @@
             else{
               var temp = "";
               console.log(res[1]["full_asset_name"]);
-              if(res[1]["avatar_url"] == "" && res[1]["avatar_url"] == null){
+              if(res[1]["avatar_url"] == "" || res[1]["avatar_url"] == null){
                 $("#avater").css("display", "none");
               }
               else{

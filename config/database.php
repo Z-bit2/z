@@ -19,11 +19,12 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', '3306'),
+            'host' => env('DB_HOST', '
+database-1.cju59kyu5adn.us-east-2.rds.amazonaws.com'),
+            'port' => env('DB_PORT', '3307'),
             'database' => env('DB_DATABASE', 'DFrexa'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', ''),
+            'username' => env('DB_USERNAME', 'admin'),
+            'password' => env('DB_PASSWORD', 'Lr8T34HzAdMLs9aEDFfN'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
