@@ -628,44 +628,72 @@
 			ajax_data['contract_type'] = 1;
 			ajax_data['contract_content'] = $("#contract_url").val();
 		}
-		$.ajax({
-			headers:{
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			},
-			type : 'POST',
-			url : "{{ route('image_upload.action') }}",
-			data : formData,
-			contentType: false,
-			cache: false,
-			processData: false,
-			success:function(res, status){
-				if(res != "failed"){
-					ajax_data['avatar_url'] = res;
-					$.ajax({
-						headers:{
-							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-						},
-						type : 'POST',
-						url : '/sub_asset_creation',
-						data : {
-							_token : "<?php  ?>",
-							data : ajax_data
-						},
-						success:function(res, status){
-							if(res == "success"){
-								window.location.href = '/frexawallet';
-							}
-							else{
-								alert("Oops! Something went Wrong!");
-							}
-						}
-					});
+		var check = $("#upload_img").attr("src");
+
+		if(check == ""){
+			ajax_data['avatar_url'] = "";
+			$.ajax({
+				headers:{
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				},
+				type : 'POST',
+				url : '/asset_creation',
+				data : {
+					_token : "<?php  ?>",
+					data : ajax_data
+				},
+				success:function(res, status){
+					if(res == "success"){
+						window.location.reload(true);
+					}
+					else{
+						alert(res);
+					}
 				}
-				else{
-					alert("Image Upload Failed");
+			});
+		}
+
+		else{
+			$.ajax({
+				headers:{
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				},
+				type : 'POST',
+				url : "{{ route('image_upload.action') }}",
+				data : formData,
+				contentType: false,
+				cache: false,
+				processData: false,
+				success:function(res, status){
+					if(res != "failed"){
+						ajax_data['avatar_url'] = res;
+						$.ajax({
+							headers:{
+								'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+							},
+							type : 'POST',
+							url : '/sub_asset_creation',
+							data : {
+								_token : "<?php  ?>",
+								data : ajax_data
+							},
+							success:function(res, status){
+								if(res == "success"){
+									window.location.href = '/frexawallet';
+								}
+								else{
+									alert("Oops! Something went Wrong!");
+								}
+							}
+						});
+					}
+					else{
+						alert("Image Upload Failed");
+					}
 				}
-			}
-	    });
+		    });
+		}
+
 	}
 
 	document.getElementById("asset_name").addEventListener("keypress", forceKeyPressUppercase, false);
